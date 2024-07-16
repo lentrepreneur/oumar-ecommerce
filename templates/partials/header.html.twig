@@ -1,0 +1,88 @@
+<header>
+    <!--TOP PART-->
+    <marquee class="bg-firstColor p-2">
+        <div class="flex items-center justify-between">
+        <a href="/" class="text-black text-xs"
+            >Propmotion -30% de reduction.</a
+        >
+        <a href="/" class="text-black text-xs"
+            >Livraison gratuit a partir de 5000 F</a
+        >
+        <a href="/" class="text-black text-xs"
+            >Propmotion -30% de reduction.</a
+        >
+        <a href="/" class="text-black text-xs"
+            >Livraison gratuit a partir de 5000 F</a
+        >
+        <a href="/" class="text-black text-xs"
+            >Propmotion -30% de reduction.</a
+        >
+        <a href="/" class="text-black text-xs"
+            >Livraison gratuit a partir de 5000 F</a
+        >
+        </div>
+    </marquee>
+
+    <!-- BOTTOM PART -->
+    <div class="flex items-center justify-between px-7 py-3 shadow-md">
+        <!-- LEFT PART : menu -->
+        <ul class="hidden md:flex items-center gap-4">
+            <li><a href="/">Accueil</a></li>
+            <li><a href="/boutique.html">Boutique</a></li>
+            <li><a href="/about.html">A Propos</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+        </ul>
+        <!-- MIDDLE PART -->
+        <div class="flex items-center justify-between gap-5">
+            <button id="menu-button" class="md:hidden">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+            <div class="w-[180px] max-sm:w-[100px] max-sm:h-[30px] h-[50px]">
+                <a href="/"
+                ><img src="/logo.jpg" class="w-full h-full" alt="logo"
+                /></a>
+            </div>
+        </div>
+        <!-- RIGHT PART -->
+        <div class="flex items-center gap-4">
+            <form
+                class="ring-1 ring-[#e1e1e1] px-3 py-1 rounded-2xl hidden md:block"
+            >
+                <input
+                type="search"
+                placeholder="Rechercher un produit"
+                class="outline-none"
+                />
+                <button><i class="fa fa-search" aria-hidden="true"></i></button>
+            </form>
+            <!-- BUTTON SEARCH -->
+            <button id="search-button" class="md:hidden">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+            <a href="/login.html" id="user-button">
+                <i class="fa fa-user-circle" aria-hidden="true"></i>
+            </a>
+            <a href="/cart.html" class="relative">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <span
+                class="h-4 w-4 bg-red-500 text-white flex items-center justify-center rounded-full absolute -top-1 -right-2 text-xs"
+                >3</span
+                >
+            </a>
+        </div>
+    </div>
+    <!-- MOBILE SEARCH -->
+    <div
+        id="mobile-search"
+        class="absolute w-full items-center justify-center p-5 bg-white shadow-md hidden md:hidden search-menu z-100"
+    >
+        <form class="ring-1 ring-[#e1e1e1] w-full px-3 py-1 rounded-lg">
+            <input
+                type="search"
+                placeholder="Rechercher un produit"
+                class="outline-none w-[92%]"
+            />
+            <button><i class="fa fa-search" aria-hidden="true"></i></button>
+        </form>
+    </div>
+</header>

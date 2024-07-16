@@ -1,3 +1,93 @@
-body {
-    background-color: skyblue;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.hidden {
+  display: none;
+}
+
+.search-menu {
+  transition: max-height 0.3s ease-in-out;
+  overflow: hidden;
+  display: none;
+  max-height: 150px;
+}
+
+.search-menu.show {
+  max-height: 150px;
+  /* color: #00000036; */
+}
+
+/* PRODUCT GRID */
+.showcase:hover .hover {
+  opacity: 1;
+}
+
+.showcase:hover .default {
+  opacity: 0;
+}
+
+.showcase:hover .product-img {
+  transform: scale(1.1);
+}
+
+/* SINGLR PRODUCT BOTTOM */
+.product_bottom {
+  width: 100%;
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+.product_bottom .product_tab_container {
+  width: 90%;
+  height: 100%;
+}
+.product_bottom .product_tab_container button {
+  font-size: 1em;
+  font-weight: 400;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-color-primary);
+  position: relative;
+  cursor: pointer;
+  margin: 0 10px;
+}
+.product_bottom .product_tab_container button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 80%;
+  height: 2px;
+  background: var(--primary-color);
+  transition: all 0.5s ease;
+}
+.product_bottom .product_tab_container button.active:hover::after {
+  width: 100%;
+}
+.product_bottom .product_tab_container .tab-content {
+  padding: 20px 5px;
+}
+.product_bottom .product_tab_container .tab-content.desc p {
+  margin: 15px 0;
+  text-align: justify;
+}
+.product_bottom .product-single__addtional-info .item {
+  margin: 20px 0;
+}
+.product_bottom .product-single__addtional-info .item .addtional-info-label {
+  font-weight: 500;
+}
+.product_bottom .review h1 {
+  font-weight: 500;
+}
+
+.payment-option input:checked + img {
+  border-color: black;
+}
+
+.no-scroll {
+  overflow: hidden;
 }
