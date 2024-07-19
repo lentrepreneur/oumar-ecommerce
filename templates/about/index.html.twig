@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}A propos{% endblock %}
+
+{% block pages_hero_section %}
+    {% include 'partials/pages-hero-section.html.twig' %}
+{% endblock %}
+
+{% block body %}
+    {# Infos About #}
+    <div class="w-full p-8">
+      <ul class="flex items-center gap-2">
+        <li><a href="/">Accueil</a></li>
+        <li>/</li>
+        <li>A propos</li>
+      </ul>
+      <hr />
+      <div class="w-full mb-5 mt-16">
+        <div class="w-full flex max-md:flex-col items-center gap-8">
+          <img
+            src="https://zenon3.myshopify.com/cdn/shop/files/about-3.png?v=1705406562&width=900"
+            alt="img"
+            class="w-1/2 max-md:w-full"
+          />
+          <div class="w-1/2 max-md:w-full">
+            <h2 class="font-semibold text-lg my-8">A Propos de Nous</h2>
+            <p>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi
+              tenetur ab eligendi. Nemo doloremque voluptas accusamus eos,
+              fugit, excepturi sapiente fuga rem nulla alias cum architecto
+              assumenda, tempore numquam facilis?
+            </p>
+          </div>
+        </div>
+        <hr class="my-8" />
+        <div class="w-full flex flex-col justify-center">
+          <h2 class="font-semibold text-lg my-8 text-center">Notre equipe</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="border rounded-lg overflow-hidden">
+              <div class="h-[75vh]">
+                <img
+                  src="/cstm-2.jpeg"
+                  alt="Mens Winter Leathers Jackets"
+                  width="300"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <div class="p-4 flex flex-col items-center justify-center">
+                <a href="#" class="block text-gray-500 text-sm mb-2">CEO</a>
+                <a href="/single.html">
+                  <h3 class="text-lg font-semibold">Prenom et Nom</h3>
+                </a>
+              </div>
+            </div>
+
+            <div class="border rounded-lg overflow-hidden">
+              <div class="h-[75vh]">
+                <img
+                  src="/cstm-2.jpeg"
+                  alt="Mens Winter Leathers Jackets"
+                  width="300"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <div class="p-4 flex flex-col items-center justify-center">
+                <a href="#" class="block text-gray-500 text-sm mb-2">CEO</a>
+                <a href="/single.html">
+                  <h3 class="text-lg font-semibold">Prenom et Nom</h3>
+                </a>
+              </div>
+            </div>
+
+            <div class="border rounded-lg overflow-hidden">
+              <div class="h-[75vh]">
+                <img
+                  src="/cstm-2.jpeg"
+                  alt="Mens Winter Leathers Jackets"
+                  width="300"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <div class="p-4 flex flex-col items-center justify-center">
+                <a href="#" class="block text-gray-500 text-sm mb-2">CEO</a>
+                <a href="/single.html">
+                  <h3 class="text-lg font-semibold">Prenom et Nom</h3>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

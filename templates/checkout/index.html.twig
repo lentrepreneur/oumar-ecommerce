@@ -1,0 +1,164 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block pages_hero_section %}
+    {% include 'partials/pages-hero-section.html.twig' %}
+{% endblock %}
+
+{% block body %}
+    {# Checkout Page #}
+    <div class="w-full my-8 flex flex-col items-center justify-center">
+      <div class="max-lg:p-8 lg:w-[80%] w-full">
+        <span class="text-2xl font-semibold">Je passe ma commande</span>
+        <hr />
+        <div class="w-full flex flex-col-reverse lg:flex-row gap-5 my-4">
+          {# <!--CHECKOUT FORM--> #}
+          <form class="w-full lg:w-1/2 mt-4 flex flex-col gap-4">
+            <span class="text-lg"
+              >Mettre a jour mes contacts et mon adresse de Livraison</span
+            >
+            <input
+              type="text"
+              placeholder="Votre numero de telephone"
+              class="w-full outline-none p-3 border rounded-md"
+            />
+            <div class="w-full flex item-center gap-3">
+              <input
+                type="text"
+                name="address"
+                placeholder="Votre adresse"
+                class="w-1/2 outline-none p-3 border rounded-md"
+              />
+              <input
+                type="text"
+                name="city"
+                placeholder="Ville"
+                class="w-1/2 outline-none p-3 border rounded-md"
+              />
+            </div>
+            <div class="flex gap-3">
+              <input type="checkbox" id="subscribe" />
+              <label for="subscribe"
+                >J'accept de recevoir de m'inscrire pour de nouvelles
+                offres</label
+              >
+            </div>
+            {# <!--PAYMENT PART--> #}
+            <div class="">
+              <span>Choisir le mode de paiement</span>
+              <div class="flex gap-5 my-5">
+                <label class="payment-option relative cursor-pointer">
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="wave"
+                    class="absolute opacity-0"
+                  />
+                  <img
+                    src="/wave.png"
+                    alt="Wave"
+                    class="w-20 h-20 border-2 rounded-md transition duration-300"
+                  />
+                </label>
+                <label class="payment-option relative cursor-pointer">
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="om"
+                    class="absolute opacity-0"
+                  />
+                  <img
+                    src="/om.png"
+                    alt="Orange Money"
+                    class="w-20 h-20 border-2 rounded-md transition duration-300"
+                  />
+                </label>
+                <label class="payment-option relative cursor-pointer">
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="free"
+                    class="absolute opacity-0"
+                  />
+                  <img
+                    src="/free.png"
+                    alt="Free"
+                    class="w-20 h-20 border-2 rounded-md transition duration-300"
+                  />
+                </label>
+              </div>
+            </div>
+            <span class="text-grey-500 text-xs"
+              >Finaliser maintenant votre commande et faites vous livrez</span
+            >
+            <button type="submit" class="bg-black p-3 text-white">
+              Commander
+            </button>
+          </form>
+          {# <!--
+          <div class="w-1/2 flex flex-col gap-4 my-8 hidden">
+            <span>Vous n'avez pas de compte, veuillez creer un compte</span>
+            <a href="/register" class="p-4 bg-black text-white"
+              >Creer un compte</a
+            >
+          </div>
+        --> #}
+          {# <!--CHECKOUT RESUME--> #}
+          <div
+            class="w-full flex flex-col items-center justify-between lg:w-1/2 bg-firstColor mt-4 p-4"
+          >
+            {# <!--PRODUCT ITEMS--> #}
+            <div class="w-full flex flex-col gap-4">
+              <div class="flex items-center justify-between">
+                {# <!--LEFT--> #}
+                <div class="flex items-center gap-2">
+                  <div class="w-max">
+                    <img
+                      src="/im0.jpg"
+                      alt=""
+                      class="w-[70px] h-[70px] rounded-md -z-4"
+                    />
+                  </div>
+                  <div class="flex flex-col">
+                    <span class="text-xs font-semibold"
+                      >COSTUME AFRICAIN SUPER</span
+                    >
+                    <span class="text-[#8080808e]">35.000 x 2</span>
+                  </div>
+                </div>
+                {# <!--RIGHT--> #}
+                <span class="text-xs font-semibold">70.000 FCFA</span>
+              </div>
+
+              <div class="flex items-center justify-between">
+                {# <!--LEFT--> #}
+                <div class="flex items-center gap-2">
+                  <div class="w-max">
+                    <img
+                      src="/im11.jpg"
+                      alt=""
+                      class="w-[70px] h-[70px] rounded-md -z-10"
+                    />
+                  </div>
+                  <div class="flex flex-col">
+                    <span class="text-xs font-semibold"
+                      >COSTUME AFRICAIN SUPER</span
+                    >
+                    <span class="text-[#8080808e]">30.000 x 3</span>
+                  </div>
+                </div>
+                {# <!--RIGHT--> #}
+                <span class="text-xs font-semibold">90.000 FCFA</span>
+              </div>
+            </div>
+            {# <!--TOTAL--> #}
+            <div class="w-full flex items-center justify-between">
+              <span class="text-lg font-semibold">Total</span>
+              <span class="text-lg font-bold">160.000 FCFA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

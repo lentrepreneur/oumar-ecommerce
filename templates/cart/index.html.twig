@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block pages_hero_section %}
+    {% include 'partials/pages-hero-section.html.twig' %}
+{% endblock %}
+
+{% block body %}
+    {# Panier #}
+    <div class="w-full my-8 flex flex-col items-center justify-center">
+      <div class="max-lg:p-8 lg:w-[80%] w-full">
+        <span class="text-2xl font-semibold">Mon panier</span>
+        <hr />
+        <div class="w-full my-5">
+          <div class="w-full flex flex-col gap-4">
+            <!--WRAPPER-->
+            <div
+              class="w-full flex items-center justify-between bg-firstColor p-4"
+            >
+              <!--LEFT-->
+              <div
+                class="w-2/3 flex max-sm:flex-col items-center justify-between"
+              >
+                <div class="flex items-center gap-4">
+                  <img
+                    src="/im0.jpg"
+                    alt=""
+                    class="w-[70px] h-[70px] rounded-md"
+                  />
+                  <div class="flex flex-col">
+                    <span class="text-xs font-semibold"
+                      >COSTUME AFRICAIN SUPER</span
+                    >
+                    <span class="text-xs">Costume</span>
+                    <span class="text-xs font-semibold">35.000 FCFA</span>
+                    <span
+                      class="h-6 w-6 flex items-center justify-center rounded-full bg-red-500 text-white hover:cursor-pointer"
+                      ><ion-icon name="trash"></ion-icon
+                    ></span>
+                  </div>
+                </div>
+                <div class="flex flex-col sm:items-center gap-1">
+                  <span class="text-xs">Quantite</span>
+                  <div class="flex items-center gap-4">
+                    <button type="button" class="p-1 border rounded-md text-xs">
+                      <ion-icon name="remove"></ion-icon>
+                    </button>
+                    <span class="text-xs">2</span>
+                    <button type="button" class="p-1 border rounded-md text-xs">
+                      <ion-icon name="add"></ion-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!--RIGHT-->
+              <div class="flex flex-col items-center gap-2">
+                <span class="text-xs">Totoal</span>
+                <span class="text-xs font-semibold">70.000 FCFA</span>
+              </div>
+            </div>
+
+            <div
+              class="w-full flex items-center justify-between bg-firstColor p-4"
+            >
+              <!--LEFT-->
+              <div
+                class="w-2/3 flex max-sm:flex-col items-center justify-between"
+              >
+                <div class="flex items-center gap-4">
+                  <img
+                    src="/im11.jpg"
+                    alt=""
+                    class="w-[70px] h-[70px] rounded-md"
+                  />
+                  <div class="flex flex-col">
+                    <span class="text-xs font-semibold"
+                      >COSTUME AFRICAIN SUPER</span
+                    >
+                    <span class="text-xs">Costume</span>
+                    <span class="text-xs font-semibold">30.000 FCFA</span>
+                    <span
+                      class="h-6 w-6 flex items-center justify-center rounded-full bg-red-500 text-white hover:cursor-pointer"
+                      ><ion-icon name="trash"></ion-icon
+                    ></span>
+                  </div>
+                </div>
+                <div class="flex flex-col sm:items-center gap-1">
+                  <span class="text-xs">Quantite</span>
+                  <div class="flex items-center gap-4">
+                    <button type="button" class="p-1 border rounded-md text-xs">
+                      <ion-icon name="remove"></ion-icon>
+                    </button>
+                    <span class="text-xs">3</span>
+                    <button type="button" class="p-1 border rounded-md text-xs">
+                      <ion-icon name="add"></ion-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!--RIGHT-->
+              <div class="flex flex-col items-center gap-2">
+                <span class="text-xs">Totoal</span>
+                <span class="text-xs font-semibold">90.000 FCFA</span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="w-max p-4 bg-firstColor flex flex-col gap-4 justify-end my-8 border"
+          >
+            <div class="flex items-center gap-8">
+              <span class="text-xs">Total estime a : </span>
+              <span class="text-sm font-semibold">160.000 FCFA</span>
+            </div>
+            <a href="{{ path('app_checkout') }}" class="p-3 bg-black text-white w-max"
+              >Passer au paiement</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

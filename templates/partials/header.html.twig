@@ -28,9 +28,9 @@
         <!-- LEFT PART : menu -->
         <ul class="hidden md:flex items-center gap-4">
             <li><a href="/">Accueil</a></li>
-            <li><a href="/boutique.html">Boutique</a></li>
-            <li><a href="/about.html">A Propos</a></li>
-            <li><a href="/contact.html">Contact</a></li>
+            <li><a href="{{ path('app_shop') }}">Boutique</a></li>
+            <li><a href="{{ path('app_about') }}">A Propos</a></li>
+            <li><a href="{{ path('app_contact') }}">Contact</a></li>
         </ul>
         <!-- MIDDLE PART -->
         <div class="flex items-center justify-between gap-5">
@@ -62,7 +62,7 @@
             <a href="/login.html" id="user-button">
                 <i class="fa fa-user-circle" aria-hidden="true"></i>
             </a>
-            <a href="/cart.html" class="relative">
+            <a href="{{ path('app_cart') }}" class="relative">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                 <span
                 class="h-4 w-4 bg-red-500 text-white flex items-center justify-center rounded-full absolute -top-1 -right-2 text-xs"

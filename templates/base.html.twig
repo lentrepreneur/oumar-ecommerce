@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>AlAmin Desingn - {% block title %}{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
 
         <link
@@ -34,6 +34,10 @@
             
         {% endblock %}
 
+        {% block pages_hero_section %}
+            
+        {% endblock %}
+
         <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden">
             <div class="absolute top-0 left-0 w-64 h-full bg-white shadow-lg p-4">
                 <button id="close-button" class="text-gray-700 focus:outline-none">
@@ -44,13 +48,13 @@
                         <a href="/">Acceuil</a>
                     </li>
                     <li class="w-full hover:bg-firstColor px-8 py-1">
-                        <a href="/boutique.html">Boutique</a>
+                        <a href="{{ path('app_shop') }}">Boutique</a>
                     </li>
                     <li class="w-full hover:bg-firstColor px-8 py-1">
-                        <a href="/about.html">A Propos</a>
+                        <a href="{{ path('app_about') }}">A Propos</a>
                     </li>
                     <li class="w-full hover:bg-firstColor px-8 py-1">
-                        <a href="/contact.html">Contact</a>
+                        <a href="{{ path('app_contact') }}">Contact</a>
                     </li>
                 </ul>
             </div>
