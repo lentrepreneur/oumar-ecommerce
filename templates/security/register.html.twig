@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Boutique{% endblock %}
+
+{% block pages_hero_section %}
+    {% include 'partials/pages-hero-section.html.twig' %}
+{% endblock %}
+
+{% block body %}
+    {# Register Form #}
+    <div class="w-full my-8 flex items-center justify-center">
+      <div class="w-[25%] max-md:w-[90%]">
+        <h3 class="text-center font-bold text-xl my-5">Creer votre compte</h3>
+        
+        <div class="w-full flex flex-col items-center justify-center gap-8">
+            {{ form(registerForm) }}
+        </div>
+
+        <div class="flex items-center justify-between my-5">
+          Vous avez deja un compte ?
+          <a href="{{ path('app_register') }}">Connectez vous.</a>
+        </div>
+      </div>
+    </div>
+{% endblock %}
