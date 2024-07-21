@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
@@ -37,7 +38,7 @@ class Product
     /**
      * @var Collection<int, ProductImage>
      */
-    #[ORM\OneToMany(targetEntity: ProductImage::class, mappedBy: 'product')]
+    #[ORM\OneToMany(targetEntity: ProductImage::class, mappedBy: 'product', cascade: ['persist'], orphanRemoval: true)]
     private Collection $images;
 
     public function __construct()
@@ -150,5 +151,10 @@ class Product
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

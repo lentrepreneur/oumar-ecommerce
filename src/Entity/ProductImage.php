@@ -40,7 +40,7 @@ class ProductImage
         return $this->imageName;
     }
 
-    public function setImageName(string $imageName): static
+    public function setImageName(?string $imageName): static
     {
         $this->imageName = $imageName;
 
@@ -73,5 +73,10 @@ class ProductImage
         $this->product = $product;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->imageName;
     }
 }
