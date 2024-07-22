@@ -2,24 +2,12 @@
     <!--TOP PART-->
     <marquee class="bg-firstColor p-2">
         <div class="flex items-center justify-between">
-        <a href="/" class="text-black text-xs"
-            >Propmotion -30% de reduction.</a
-        >
-        <a href="/" class="text-black text-xs"
-            >Livraison gratuit a partir de 5000 F</a
-        >
-        <a href="/" class="text-black text-xs"
-            >Propmotion -30% de reduction.</a
-        >
-        <a href="/" class="text-black text-xs"
-            >Livraison gratuit a partir de 5000 F</a
-        >
-        <a href="/" class="text-black text-xs"
-            >Propmotion -30% de reduction.</a
-        >
-        <a href="/" class="text-black text-xs"
-            >Livraison gratuit a partir de 5000 F</a
-        >
+            {% if topPromo %}
+                {% for item in topPromo %}
+                    <a href="{{ item.link }}" class="text-black text-xs">{{ item.name }}</a>
+                {% endfor %}
+            >
+            {% endif %}
         </div>
     </marquee>
 
@@ -39,7 +27,7 @@
             </button>
             <div class="w-[180px] max-sm:w-[100px] max-sm:h-[30px] h-[50px]">
                 <a href="/"
-                ><img src="/logo.jpg" class="w-full h-full" alt="logo"
+                ><img src="{{ asset('/images/upload/') }}{{ informations.logo }}" class="w-full h-full" alt="logo"
                 /></a>
             </div>
         </div>

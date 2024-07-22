@@ -14,7 +14,7 @@
       <ul class="my-4 flex items-center gap-2">
         <li><a href="/">Accueil</a></li>
         <li>/</li>
-        <li>Details (to check)</li>
+        <li>Details {{ product.name }}</li>
       </ul>
       <hr />
       <div class="w-full">
@@ -26,54 +26,30 @@
               <div
                 class="w-[25%] flex flex-col max-sm:flex-row max-sm:gap-2 max-sm:w-full gap-3 items-center justify-center mt-8 hover-container"
               >
-                <div
-                  class="flex items-center justify-center hover:border-[#ff91a3]"
-                >
-                  <img src="/cstm-1.jpg" class="w-[60px] cursor-pointer" />
-                </div>
-                <div
-                  class="flex items-center justify-center hover:border-[#ff91a3]"
-                >
-                  <img src="/cstm-2.jpeg" class="w-[60px] cursor-pointer" />
-                </div>
-                <div
-                  class="flex items-center justify-center hover:border-[#ff91a3]"
-                >
-                  <img src="/im0.jpg" class="w-[60px] cursor-pointer" />
-                </div>
-                <div
-                  class="flex items-center justify-center hover:border-[#ff91a3]"
-                >
-                  <img src="/im01.jpg" class="w-[60px] cursor-pointer" />
-                </div>
-                <div
-                  class="flex items-center justify-center hover:border-[#ff91a3]"
-                >
-                  <img src="/im1.jpeg" class="w-[60px] cursor-pointer" />
-                </div>
+                {% for item in product.getImages() %}
+                  <div
+                    class="flex items-center justify-center hover:border-[#ff91a3]"
+                  >
+                    <img src="{{  asset('/images/products/') }}{{ item.imageName }}" class="w-[60px] cursor-pointer" />
+                  </div>
+                {% endfor %}
               </div>
 
               <div class="w-[75%] max-sm:w-full h-[80vh] img-container">
                 <img
-                  src="/im22.jpg"
+                  src="{{  asset('/images/products/') }}{{ product.getImages()[0].imageName }}"
                   alt="watch"
                   class="w-full h-full mx-auto"
                 />
               </div>
             </div>
             <div class="w-[50%] max-md:w-full p-5 flex flex-col gap-5">
-              <span class="font-bold">COSTUME AFRICAIN SUPER 120</span>
+              <span class="font-bold">{{ product.name }}</span>
               <hr />
-              <span class="fonct-semibold text-lg">Prix : 45.000 FCFA</span>
+              <span class="fonct-semibold text-lg">Prix : {{ (product.price / 100) |format_currency('XAF') }}</span>
 
               <p class="product-description">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae
-                animi ad minima veritatis dolore. Architecto facere dignissimos
-                voluptate fugit ratione molestias quis quidem exercitationem
-                voluptas. Lorem ipsum dolor sit amet, consectetur adipisicing
-                elit. Minima possimus repellat et aliquid obcaecati eos qui cum
-                facere sapiente culpa fugiat maiores expedita id doloribus sit,
-                consequuntur sint! Unde, quod.
+                {{ product.shortDescription|raw }} 
               </p>
               <hr />
               <div class="pt-16 flex flex-col gap-10">

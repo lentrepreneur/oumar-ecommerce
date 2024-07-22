@@ -6,9 +6,9 @@
         <div class="flex flex-wrap justify-between">
             <div class="w-full flex flex-col md:items-center gap-5 md:w-1/3 mb-6 md:mb-0">
                 <h3 class="text-xl font-semibold mb-4">Contactez-Nous</h3>
-                <p class="">HLM Grand Yoff, Dakar, Senegal</p>
-                <p class="">Email: info@example.com</p>
-                <p class="">Telephone: +221 77 000 00 00</p>
+                <p class="">{{ informations.address }}</p>
+                <p class="">Email: {{ informations.email }}</p>
+                <p class="">Telephone: {{ informations.phone }}</p>
             </div>
             <div class="w-full flex flex-col md:items-center gap-5 md:w-1/3 mb-6 md:mb-0">
                 <h3 class="text-xl font-semibold mb-4">Liens rapides</h3>
@@ -30,28 +30,20 @@
             <div class="w-full flex flex-col md:items-center gap-5 md:w-1/3">
                 <h3 class="text-xl font-semibold mb-4">Suivez Nous</h3>
                 <div class="flex flex-col gap-4">
-                    <a href="#" class="hover:text-slate-500 flex items-center gap-3"
-                    ><i class="fab fa-facebook-f"></i>
-                    <span>Facebook</span>
-                    </a>
-                    <a href="#" class="hover:text-slate-500 flex items-center gap-3"
-                    ><i class="fab fa-twitter"></i>
-                    <span>Twitter</span>
-                    </a>
-                    <a href="#" class="hover:text-slate-500 flex items-center gap-3"
-                    ><i class="fab fa-instagram"></i>
-                    <span>Instagram</span>
-                    </a>
-                    <a href="#" class="hover:text-slate-500 flex items-center gap-3"
-                    ><i class="fab fa-linkedin-in"></i>
-                    <span>Linkedin</span>
-                    </a>
+                    {% if socialMedia %}
+                        {% for item in socialMedia %}
+                            <a href="{{ item.link }}" class="hover:text-slate-500 flex items-center gap-3">
+                                <i class="{{ item.iconName }}"></i>
+                                <span>{{ item.name }}</span>
+                            </a>
+                        {% endfor %}
+                    {% endif %}
                 </div>
             </div>
         </div>
         <div class="mt-8 text-center">
             <p class="text-spanish-gray">
-            &copy; 2024 AlAmin Design. Tout Droit Reserve.
+            &copy; 2024 {{ informations.siteName }}. Tout Droit Reserve.
             </p>
         </div>
     </div>

@@ -48,305 +48,65 @@
             PRODUCT GRID
             --> #}
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div class="border rounded-lg overflow-hidden">
-              {# <!--SHOWCASE BANNER--> #}
-              <div class="relative showcase">
-                <img
-                  src="/cstm-2.jpeg"
-                  alt="Mens Winter Leathers Jackets"
-                  width="300"
-                  class="w-full h-full object-cover relative z-1 transform transition-transform duration-300 ease-in-out default"
-                />
-                <img
-                  src="/cstm-1.jpg"
-                  alt="Mens Winter Leathers Jackets"
-                  class="w-full h-full object-cover absolute top-0 left-0 z-2 opacity-0 hover:opacity-1 transform transition-transform duration-300 ease-in-out hover"
-                />
+            {% if (products == null)  %}
+              <p>Liste de produit vide</p>
+            {% else %}
+              {% for item in products %}
+              {% set real_price = item.price / 100 %}
+              {% set price_discount = (item.price / 100) - ((item.price / 100) * item.discount) %}
+                <div class="border rounded-lg overflow-hidden">
+                    <!--SHOWCASE BANNER-->
+                    <div class="relative showcase">
+                      <img
+                        src="{{ asset('/images/products/') }}{{ item.getImages()[0].imageName }}"
+                        alt="Mens Winter Leathers Jackets"
+                        width="300"
+                        class="w-full h-full object-cover relative z-1 transform transition-transform duration-300 ease-in-out default"
+                      />
+                      <img
+                        src="{{ asset('/images/products/') }}{{ item.getImages()[1].imageName }}"
+                        alt="Mens Winter Leathers Jackets"
+                        class="w-full h-full object-cover absolute top-0 left-0 z-2 opacity-0 hover:opacity-1 transform transition-transform duration-300 ease-in-out hover"
+                      />
+                      {% if (item.discount != 0 and item.discount != null) %}
+                        <p
+                          class="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-xs font-bold rounded"
+                        >
+                          -{{ item.discount * 100 }} %
+                        </p>
+                      {% endif %}
+                      <div
+                        class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2"
+                      >
+                        <button class="btn-action bg-white rounded-full p-2">
+                          <ion-icon name="eye-outline"></ion-icon>
+                        </button>
 
-                <p
-                  class="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-xs font-bold rounded"
-                >
-                  15%
-                </p>
+                        <button class="btn-action bg-white rounded-full p-2">
+                          <ion-icon name="bag-add-outline"></ion-icon>
+                        </button>
+                      </div>
+                    </div>
 
-                <div
-                  class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2"
-                >
-                  <button class="btn-action bg-white rounded-full p-2">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </button>
+                    <div class="p-4">
+                      <a href="#" class="block text-gray-500 text-sm mb-2">Costume</a>
 
-                  <button class="btn-action bg-white rounded-full p-2">
-                    <ion-icon name="bag-add-outline"></ion-icon>
-                  </button>
+                      <a href="{{ path('app_product_detail', {'id': item.id}) }}">
+                        <h3 class="text-lg font-semibold">{{ item.name }}</h3>
+                      </a>
+
+                      <div class="mt-2">
+                        {% if (item.discount != 0 and item.discount != null) %}
+                          <span class="text-lg font-bold">{{ price_discount | format_currency('XOF') }}</span>
+                          <del class="text-gray-500 ml-2">{{ real_price | format_currency('XOF') }} FCFA</del>
+                        {% else %}
+                          <span class="text-lg font-bold">{{ real_price | format_currency('XOF') }} FCFA</span>
+                        {% endif %}
+                      </div>
+                    </div>
                 </div>
-              </div>
-
-              <div class="p-4">
-                <a href="#" class="block text-gray-500 text-sm mb-2">Costume</a>
-
-                <a href="{{ path('app_product_detail') }}">
-                  <h3 class="text-md font-semibold">
-                    COSTUME AFRICAIN SUPER 120
-                  </h3>
-                </a>
-
-                <div class="mt-2">
-                  <span class="text-xl font-bold">30.000 FCFA</span>
-                  <del class="text-gray-500 ml-2">45.000 FCFA</del>
-                </div>
-              </div>
-            </div>
-
-            <div class="border rounded-lg overflow-hidden">
-              {# <!--SHOWCASE BANNER--> #}
-              <div class="relative showcase">
-                <img
-                  src="/im0.jpg"
-                  alt="Mens Winter Leathers Jackets"
-                  width="300"
-                  class="w-full h-full object-cover relative z-1 transform transition-transform duration-300 ease-in-out default"
-                />
-                <img
-                  src="/im01.jpg"
-                  alt="Mens Winter Leathers Jackets"
-                  class="w-full h-full object-cover absolute top-0 left-0 z-2 opacity-0 hover:opacity-1 transform transition-transform duration-300 ease-in-out hover"
-                />
-
-                <p
-                  class="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-xs font-bold rounded"
-                >
-                  15%
-                </p>
-
-                <div
-                  class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2"
-                >
-                  <button class="btn-action bg-white rounded-full p-2">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </button>
-
-                  <button class="btn-action bg-white rounded-full p-2">
-                    <ion-icon name="bag-add-outline"></ion-icon>
-                  </button>
-                </div>
-              </div>
-
-              <div class="p-4">
-                <a href="#" class="block text-gray-500 text-sm mb-2">Costume</a>
-
-                <a href="{{ path('app_product_detail') }}">
-                  <h3 class="text-md font-semibold">
-                    COSTUME AFRICAIN SUPER 120
-                  </h3>
-                </a>
-
-                <div class="mt-2">
-                  <span class="text-xl font-bold">35.000 FCFA</span>
-                  <del class="text-gray-500 ml-2">49.000 FCFA</del>
-                </div>
-              </div>
-            </div>
-
-            <div class="border rounded-lg overflow-hidden">
-              {# <!--SHOWCASE BANNER--> #}
-              <div class="relative showcase">
-                <img
-                  src="/im1.jpeg"
-                  alt="Mens Winter Leathers Jackets"
-                  width="300"
-                  class="w-full h-full object-cover relative z-1 transform transition-transform duration-300 ease-in-out default"
-                />
-                <img
-                  src="/im11.jpg"
-                  alt="Mens Winter Leathers Jackets"
-                  class="w-full h-full object-cover absolute top-0 left-0 z-2 opacity-0 hover:opacity-1 transform transition-transform duration-300 ease-in-out hover"
-                />
-
-                <p
-                  class="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-xs font-bold rounded"
-                >
-                  15%
-                </p>
-
-                <div
-                  class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2"
-                >
-                  <button class="btn-action bg-white rounded-full p-2">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </button>
-
-                  <button class="btn-action bg-white rounded-full p-2">
-                    <ion-icon name="bag-add-outline"></ion-icon>
-                  </button>
-                </div>
-              </div>
-
-              <div class="p-4">
-                <a href="#" class="block text-gray-500 text-sm mb-2">Costume</a>
-
-                <a href="{{ path('app_product_detail') }}">
-                  <h3 class="text-md font-semibold">
-                    COSTUME AFRICAIN SUPER 120
-                  </h3>
-                </a>
-
-                <div class="mt-2">
-                  <span class="text-xl font-bold">28.000 FCFA</span>
-                  <del class="text-gray-500 ml-2">39.000 FCFA</del>
-                </div>
-              </div>
-            </div>
-
-            <div class="border rounded-lg overflow-hidden">
-              {# <!--SHOWCASE BANNER--> #}
-              <div class="relative showcase">
-                <img
-                  src="/im2.jpg"
-                  alt="Mens Winter Leathers Jackets"
-                  width="300"
-                  class="w-full h-full object-cover relative z-1 transform transition-transform duration-300 ease-in-out default"
-                />
-                <img
-                  src="/im22.jpg"
-                  alt="Mens Winter Leathers Jackets"
-                  class="w-full h-full object-cover absolute top-0 left-0 z-2 opacity-0 hover:opacity-1 transform transition-transform duration-300 ease-in-out hover"
-                />
-
-                <p
-                  class="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-xs font-bold rounded"
-                >
-                  15%
-                </p>
-
-                <div
-                  class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2"
-                >
-                  <button class="btn-action bg-white rounded-full p-2">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </button>
-
-                  <button class="btn-action bg-white rounded-full p-2">
-                    <ion-icon name="bag-add-outline"></ion-icon>
-                  </button>
-                </div>
-              </div>
-
-              <div class="p-4">
-                <a href="#" class="block text-gray-500 text-sm mb-2">Costume</a>
-
-                <a href="{{ path('app_product_detail') }}">
-                  <h3 class="text-md font-semibold">
-                    COSTUME AFRICAIN SUPER 120
-                  </h3>
-                </a>
-
-                <div class="mt-2">
-                  <span class="text-xl font-bold">18.000 FCFA</span>
-                  <del class="text-gray-500 ml-2">23.000 FCFA</del>
-                </div>
-              </div>
-            </div>
-
-            <div class="border rounded-lg overflow-hidden">
-              <!--SHOWCASE BANNER-->
-              <div class="relative showcase">
-                <img
-                  src="/im2.jpg"
-                  alt="Mens Winter Leathers Jackets"
-                  width="300"
-                  class="w-full h-full object-cover relative z-1 transform transition-transform duration-300 ease-in-out default"
-                />
-                <img
-                  src="/im22.jpg"
-                  alt="Mens Winter Leathers Jackets"
-                  class="w-full h-full object-cover absolute top-0 left-0 z-2 opacity-0 hover:opacity-1 transform transition-transform duration-300 ease-in-out hover"
-                />
-
-                <p
-                  class="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-xs font-bold rounded"
-                >
-                  15%
-                </p>
-
-                <div
-                  class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2"
-                >
-                  <button class="btn-action bg-white rounded-full p-2">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </button>
-
-                  <button class="btn-action bg-white rounded-full p-2">
-                    <ion-icon name="bag-add-outline"></ion-icon>
-                  </button>
-                </div>
-              </div>
-
-              <div class="p-4">
-                <a href="#" class="block text-gray-500 text-sm mb-2">Costume</a>
-
-                <a href="{{ path('app_product_detail') }}">
-                  <h3 class="text-md font-semibold">
-                    COSTUME AFRICAIN SUPER 120
-                  </h3>
-                </a>
-
-                <div class="mt-2">
-                  <span class="text-xl font-bold">18.000 FCFA</span>
-                  <del class="text-gray-500 ml-2">23.000 FCFA</del>
-                </div>
-              </div>
-            </div>
-
-            <div class="border rounded-lg overflow-hidden">
-              <!--SHOWCASE BANNER-->
-              <div class="relative showcase">
-                <img
-                  src="/im2.jpg"
-                  alt="Mens Winter Leathers Jackets"
-                  width="300"
-                  class="w-full h-full object-cover relative z-1 transform transition-transform duration-300 ease-in-out default"
-                />
-                <img
-                  src="/im22.jpg"
-                  alt="Mens Winter Leathers Jackets"
-                  class="w-full h-full object-cover absolute top-0 left-0 z-2 opacity-0 hover:opacity-1 transform transition-transform duration-300 ease-in-out hover"
-                />
-
-                <p
-                  class="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-xs font-bold rounded"
-                >
-                  15%
-                </p>
-
-                <div
-                  class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2"
-                >
-                  <button class="btn-action bg-white rounded-full p-2">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </button>
-
-                  <button class="btn-action bg-white rounded-full p-2">
-                    <ion-icon name="bag-add-outline"></ion-icon>
-                  </button>
-                </div>
-              </div>
-
-              <div class="p-4">
-                <a href="#" class="block text-gray-500 text-sm mb-2">Costume</a>
-
-                <a href="{{ path('app_product_detail') }}">
-                  <h3 class="text-md font-semibold">
-                    COSTUME AFRICAIN SUPER 120
-                  </h3>
-                </a>
-
-                <div class="mt-2">
-                  <span class="text-xl font-bold">18.000 FCFA</span>
-                  <del class="text-gray-500 ml-2">23.000 FCFA</del>
-                </div>
-              </div>
-            </div>
+              {% endfor %}
+            {% endif %}
           </div>
         </div>
       </div>
