@@ -53,6 +53,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Order::class, mappedBy: 'customer')]
     private Collection $orders;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $address = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $city = null;
+
+    #[ORM\Column]
+    private ?bool $isSubscribed = false;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
@@ -195,6 +204,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $order->setCustomer(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?string $address): static
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(?string $city): static
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function isSubscribed(): ?bool
+    {
+        return $this->isSubscribed;
+    }
+
+    public function setSubscribed(bool $isSubscribed): static
+    {
+        $this->isSubscribed = $isSubscribed;
 
         return $this;
     }

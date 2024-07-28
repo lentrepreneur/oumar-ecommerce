@@ -16,76 +16,88 @@
         <div class="w-full my-5">
           <div class="w-full flex flex-col gap-4">
             <!--WRAPPER-->
-            {% for item in cart %}
-              {% set itemTotal = (item.product.price / 100) * item.quantity %}
-              {% set totalAmount = totalAmount + itemTotal %}
-              <div
-                class="w-full flex items-center justify-between bg-firstColor p-4"
-              >
-                <!--LEFT-->
-                <div
-                  class="w-2/3 flex max-sm:flex-col items-center justify-between"
+            {% if cart == null %}
+              <div class="w-1/2 flex flex-col gap-4 my-8">
+                <span>Votre panier 🧺 est vide</span>
+                <a href="/boutique" class="p-4 bg-black text-white"
+                  >Ajouter des articles👖</a
                 >
-                  <div class="flex items-center gap-4">
-                    <img
-                      src="{{  asset('/images/products/' ~ item.product.getImages()[0].imageName) }}"
-                      alt=""
-                      class="w-[70px] h-[70px] rounded-md"
-                    />
-                    <div class="flex flex-col">
-                      <span class="text-xs font-semibold"
-                        >{{ item.product.name }}</span
-                      >
-                      <span class="text-xs">Costume</span>
-                      <span class="text-xs font-semibold">{{ (item.product.price / 100) | format_currency('XAF') }}</span>
-                      <form action="{{ path('app_cart_remove', {'item': item.product.id}) }}" method="POST">
-                        <button
-                          type="submit"
-                          class="h-6 w-6 flex items-center justify-center rounded-full bg-red-500 text-white hover:cursor-pointer"
-                        >
-                          <ion-icon name="trash"></ion-icon>
-                        </button>
-                      </form>
-                    </div>
-                  </div>
-                  <div class="flex flex-col sm:items-center gap-1">
-                    <span class="text-xs">Quantite</span>
-                    <div class="flex items-center gap-4">
-                      <form action="{{ path('app_cart_decrease', {'item': item.product.id}) }}" method="POST">
-                        <button type="submit" class="p-1 border rounded-md text-xs">
-                        <ion-icon name="remove"></ion-icon>
-                      </button>
-                      </form>
-                      <span class="text-xs">{{ item.quantity }}</span>
-                      <form action="{{ path('app_cart_increase', {'item': item.product.id}) }}" method="POST">
-                        <button type="submit" class="p-1 border rounded-md text-xs">
-                          <ion-icon name="add"></ion-icon>
-                        </button>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-                <!--RIGHT-->
-                <div class="flex flex-col items-center gap-2">
-                  <span class="text-xs">Totoal</span>
-                  <span class="text-xs font-semibold">{{ (itemTotal) | format_currency('XAF') }}</span>
-                </div>
-                
               </div>
-            {% endfor %}
+            {% else %}
+              {% for item in cart %}
+                {% set itemTotal = (item.product.price / 100) * item.quantity %}
+                {% set totalAmount = totalAmount + itemTotal %}
+                <div
+                  class="w-full flex items-center justify-between bg-firstColor p-4"
+                >
+                  <!--LEFT-->
+                  <div
+                    class="w-2/3 flex max-sm:flex-col items-center justify-between"
+                  >
+                    <div class="flex items-center gap-4">
+                      <img
+                        src="{{  asset('/images/products/' ~ item.product.getImages()[0].imageName) }}"
+                        alt=""
+                        class="w-[70px] h-[70px] rounded-md"
+                      />
+                      <div class="flex flex-col">
+                        <span class="text-xs font-semibold"
+                          >{{ item.product.name }}</span
+                        >
+                        <span class="text-xs">Costume</span>
+                        <span class="text-xs font-semibold">{{ (item.product.price / 100) | format_currency('XAF') }}</span>
+                        <form action="{{ path('app_cart_remove', {'item': item.product.id}) }}" method="POST">
+                          <button
+                            type="submit"
+                            class="h-6 w-6 flex items-center justify-center rounded-full bg-red-500 text-white hover:cursor-pointer"
+                          >
+                            <ion-icon name="trash"></ion-icon>
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                    <div class="flex flex-col sm:items-center gap-1">
+                      <span class="text-xs">Quantite</span>
+                      <div class="flex items-center gap-4">
+                        <form action="{{ path('app_cart_decrease', {'item': item.product.id}) }}" method="POST">
+                          <button type="submit" class="p-1 border rounded-md text-xs">
+                          <ion-icon name="remove"></ion-icon>
+                        </button>
+                        </form>
+                        <span class="text-xs">{{ item.quantity }}</span>
+                        <form action="{{ path('app_cart_increase', {'item': item.product.id}) }}" method="POST">
+                          <button type="submit" class="p-1 border rounded-md text-xs">
+                            <ion-icon name="add"></ion-icon>
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <!--RIGHT-->
+                  <div class="flex flex-col items-center gap-2">
+                    <span class="text-xs">Totoal</span>
+                    <span class="text-xs font-semibold">{{ (itemTotal) | format_currency('XAF') }}</span>
+                  </div>
+                  
+                </div>
+              {% endfor %}
+            {% endif %}
  
           </div>
-          <div
-            class="w-max p-4 bg-firstColor flex flex-col gap-4 justify-end my-8 border"
-          >
-            <div class="flex items-center gap-8">
-              <span class="text-xs">Total estime a : </span>
-              <span class="text-sm font-semibold">{{ (totalAmount) | format_currency('XAF') }}</span>
-            </div>
-            <a href="{{ path('app_checkout') }}" class="p-3 bg-black text-white w-max"
-              >Passer au paiement</a
+          {% if cart %}
+            <div
+              class="w-max p-4 bg-firstColor flex flex-col gap-4 justify-end my-8 border"
             >
-          </div>
+              <div class="flex items-center gap-8">
+                <span class="text-xs">Total estime a : </span>
+                <span class="text-sm font-semibold">{{ (totalAmount) | format_currency('XAF') }}</span>
+              </div>
+              
+                <a href="{{ path('app_checkout') }}" class="p-3 bg-black text-white w-max"
+                  >Passer au paiement</a
+                >
+            </div>
+          {% endif %}
         </div>
       </div>
     </div>

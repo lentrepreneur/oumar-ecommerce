@@ -50,10 +50,12 @@
                 <a href="{{ path('app_logout') }}" id="user-button">
                     <i class="fa fa-user-circle" aria-hidden="true"></i>
                 </a>
+            {% else %}
+                <a href="{{ path('app_login') }}" id="user-button">
+                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+                </a>
+
             {% endif %}
-            <a href="{{ path('app_logout') }}" id="user-button">
-                <i class="fa fa-user-circle" aria-hidden="true"></i>
-            </a>
             
             <a href="{{ path('app_cart') }}" class="relative">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>

@@ -12,126 +12,135 @@
       <div class="max-lg:p-8 lg:w-[80%] w-full">
         <span class="text-2xl font-semibold">Je passe ma commande</span>
         <hr />
+        {% if checkoutCart == null %}
+          <div class="w-1/2 flex flex-col gap-4 my-8">
+            <span>Vous n'avez pas d'articles dans votre panier🧺</span>
+            <a href="/boutique" class="p-4 bg-black text-white">Ajouter des articles👖</a>
+          </div>
+        {% else %}
         <div class="w-full flex flex-col-reverse lg:flex-row gap-5 my-4">
           {# <!--CHECKOUT FORM--> #}
-          <form class="w-full lg:w-1/2 mt-4 flex flex-col gap-4">
-            <span class="text-lg"
-              >Mettre a jour mes contacts et mon adresse de Livraison</span
-            >
-            <input
-              type="text"
-              placeholder="Votre numero de telephone"
-              class="w-full outline-none p-3 border rounded-md"
-            />
-            <div class="w-full flex item-center gap-3">
-              <input
-                type="text"
-                name="address"
-                placeholder="Votre adresse"
-                class="w-1/2 outline-none p-3 border rounded-md"
-              />
-              <input
-                type="text"
-                name="city"
-                placeholder="Ville"
-                class="w-1/2 outline-none p-3 border rounded-md"
-              />
-            </div>
-            <div class="flex gap-3">
-              <input type="checkbox" id="subscribe" />
-              <label for="subscribe"
-                >J'accept de recevoir de m'inscrire pour de nouvelles
-                offres</label
+          {% if app.user %}
+            <form action="{{ path('app_checkout_order') }}" method="POST" class="w-full lg:w-1/2 mt-4 flex flex-col gap-4">
+              <span class="text-lg"
+                >Mettre a jour mes contacts et mon adresse de Livraison</span
               >
-            </div>
-            {# <!--PAYMENT PART--> #}
-            <div class="">
-              <span>Choisir le mode de paiement</span>
-              <div class="flex gap-5 my-5">
-                <label class="payment-option relative cursor-pointer">
-                  <input
-                    type="radio"
-                    name="payment"
-                    value="wave"
-                    class="absolute opacity-0"
-                  />
-                  <img
-                    src="/wave.png"
-                    alt="Wave"
-                    class="w-20 h-20 border-2 rounded-md transition duration-300"
-                  />
-                </label>
-                <label class="payment-option relative cursor-pointer">
-                  <input
-                    type="radio"
-                    name="payment"
-                    value="om"
-                    class="absolute opacity-0"
-                  />
-                  <img
-                    src="/om.png"
-                    alt="Orange Money"
-                    class="w-20 h-20 border-2 rounded-md transition duration-300"
-                  />
-                </label>
-                <label class="payment-option relative cursor-pointer">
-                  <input
-                    type="radio"
-                    name="payment"
-                    value="free"
-                    class="absolute opacity-0"
-                  />
-                  <img
-                    src="/free.png"
-                    alt="Free"
-                    class="w-20 h-20 border-2 rounded-md transition duration-300"
-                  />
-                </label>
+              <input
+                type="text"
+                placeholder="Votre numero de telephone"
+                class="w-full outline-none p-3 border rounded-md"
+                name="phone"
+                value="{{ app.user.phone }}"
+              />
+              <div class="w-full flex item-center gap-3">
+                <input
+                  type="text"
+                  name="address"
+                  placeholder="Votre adresse"
+                  class="w-1/2 outline-none p-3 border rounded-md"
+                  value="{{ app.user.address }}"
+                />
+                <input
+                  type="text"
+                  name="city"
+                  placeholder="Ville"
+                  class="w-1/2 outline-none p-3 border rounded-md"
+                  value="{{ app.user.city }}"
+                />
               </div>
+              <div class="flex gap-3">
+                <input type="checkbox" name="isSubscribed" checked="{{ app.user.isSubscribed }}" id="subscribe" />
+                <label for="subscribe"
+                  >J'accept de recevoir de m'inscrire pour de nouvelles
+                  offres</label
+                >
+              </div>
+              {# <!--PAYMENT PART--> #}
+              <div class="">
+                <span>Choisir le mode de paiement</span>
+                <div class="flex gap-5 my-5">
+                  <label class="payment-option relative cursor-pointer">
+                    <input
+                      type="radio"
+                      name="payment"
+                      value="wave"
+                      class="absolute opacity-0"
+                    />
+                    <img
+                      src="/wave.png"
+                      alt="Wave"
+                      class="w-20 h-20 border-2 rounded-md transition duration-300"
+                    />
+                  </label>
+                  <label class="payment-option relative cursor-pointer">
+                    <input
+                      type="radio"
+                      name="payment"
+                      value="om"
+                      class="absolute opacity-0"
+                    />
+                    <img
+                      src="/om.png"
+                      alt="Orange Money"
+                      class="w-20 h-20 border-2 rounded-md transition duration-300"
+                    />
+                  </label>
+                  <label class="payment-option relative cursor-pointer">
+                    <input
+                      type="radio"
+                      name="payment"
+                      value="free"
+                      class="absolute opacity-0"
+                    />
+                    <img
+                      src="/free.png"
+                      alt="Free"
+                      class="w-20 h-20 border-2 rounded-md transition duration-300"
+                    />
+                  </label>
+                </div>
+              </div>
+              <span class="text-grey-500 text-xs cursor-not-allowed"
+                >Finaliser maintenant votre commande et faites vous livrez</span
+              >
+              <button type="submit" class="bg-black p-3 text-white">
+                Commander
+              </button>
+            </form>
+          {% else %}
+            <div class="w-1/2 flex flex-col gap-4 my-8">
+              <span>Vous n'etes pas encore connecte</span>
+              <a href="/login" class="p-4 bg-black text-white">Connectez vous ou Creez un Compte</a>
             </div>
-            <span class="text-grey-500 text-xs"
-              >Finaliser maintenant votre commande et faites vous livrez</span
-            >
-            <button type="submit" class="bg-black p-3 text-white">
-              Commander
-            </button>
-          </form>
-          {# <!--
-          <div class="w-1/2 flex flex-col gap-4 my-8 hidden">
-            <span>Vous n'avez pas de compte, veuillez creer un compte</span>
-            <a href="/register" class="p-4 bg-black text-white"
-              >Creer un compte</a
-            >
-          </div>
-        --> #}
+          {% endif %}
           {# <!--CHECKOUT RESUME--> #}
           <div
             class="w-full flex flex-col items-center justify-between lg:w-1/2 bg-firstColor mt-4 p-4"
           >
             {# <!--PRODUCT ITEMS--> #}
             <div class="w-full flex flex-col gap-4">
-              {% for item in checkoutCart %}
-                <div class="flex items-center justify-between">
-                  {# <!--LEFT--> #}
-                  <div class="flex items-center gap-2">
-                    <div class="w-max">
-                      <img
-                        src="{{  asset('/images/products/' ~ item.product.getImages()[0].imageName) }}"
-                        alt=""
-                        class="w-[70px] h-[70px] rounded-md -z-4"
-                      />
+                {% for item in checkoutCart %}
+                  <div class="flex items-center justify-between">
+                    {# <!--LEFT--> #}
+                    <div class="flex items-center gap-2">
+                      <div class="w-max">
+                        <img
+                          src="{{  asset('/images/products/' ~ item.product.getImages()[0].imageName) }}"
+                          alt=""
+                          class="w-[70px] h-[70px] rounded-md -z-4"
+                        />
+                      </div>
+                      <div class="flex flex-col">
+                        <span class="text-xs font-semibold"
+                          >{{ item.product.name }}</span
+                        >
+                        <span class="text-[#8080808e]">{{ (item.product.price / 100) | format_currency('XAF') }} x {{ item.quantity }}</span>
+                      </div>
                     </div>
-                    <div class="flex flex-col">
-                      <span class="text-xs font-semibold"
-                        >{{ item.product.name }}</span
-                      >
-                      <span class="text-[#8080808e]">{{ (item.product.price / 100) | format_currency('XAF') }} x {{ item.quantity }}</span>
-                    </div>
+                    {# <!--RIGHT--> #}
+                    <span class="text-xs font-semibold">{{ (item.totalPerItem / 100) | format_currency('XAF') }}</span>
                   </div>
-                  {# <!--RIGHT--> #}
-                  <span class="text-xs font-semibold">{{ (item.totalPerItem / 100) | format_currency('XAF') }}</span>
-                </div>
-              {% endfor %}
+                {% endfor %}
             </div>
             {# <!--TOTAL--> #}
             <div class="w-full flex items-center justify-between">
@@ -139,6 +148,7 @@
               <span class="text-lg font-bold">{{ (finalAmount / 100) | format_currency('XAF') }}</span>
             </div>
           </div>
+          {% endif %}
         </div>
       </div>
     </div>
