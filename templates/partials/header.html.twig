@@ -6,7 +6,6 @@
                 {% for item in topPromo %}
                     <a href="{{ item.link }}" class="text-black text-xs">{{ item.name }}</a>
                 {% endfor %}
-            >
             {% endif %}
         </div>
     </marquee>
@@ -60,7 +59,7 @@
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                 <span
                 class="h-4 w-4 bg-red-500 text-white flex items-center justify-center rounded-full absolute -top-1 -right-2 text-xs"
-                >3</span
+                >{{ countCart }}</span
                 >
             </a>
         </div>

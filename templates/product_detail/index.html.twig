@@ -54,23 +54,22 @@
               <hr />
               <div class="pt-16 flex flex-col gap-10">
                 <div class="w-full flex max-sm:flex-col items-center gap-4">
-                  <div class="w-[20%] max-sm:w-full flex items-center gap-3">
-                    <button type="button" class="p-3 border rounded-md">
+                  <div class="w-[20%] max-sm:w-full flex items-center gap-3" data-product-id={{ product.id }}>
+                    <button type="button" class="removeBtn p-3 border rounded-md">
                       <ion-icon name="remove"></ion-icon>
                     </button>
-                    <span>4</span>
-                    <button type="button" class="p-3 border rounded-md">
+                    <span class="counter">1</span>
+                    <button type="button" class="addBtn p-3 border rounded-md">
                       <ion-icon name="add"></ion-icon>
                     </button>
                   </div>
-                  <a
-                    href="{{ path('app_cart') }}"
+                  <button
                     type="button"
-                    class="max-sm:w-full w-[80%] p-3 border rounded-md flex items-center gap-3 bg-black text-white"
+                    class="addToCartBtn max-sm:w-full w-[80%] p-3 border rounded-md flex items-center gap-3 bg-black text-white"
                   >
                     <i class="fas fa-shopping-cart"></i
                     ><span>Ajouter au panier</span>
-                  </a>
+                  </button>
                 </div>
                 <a
                   href="{{ path('app_checkout') }}"
@@ -144,4 +143,88 @@
         </div>
       </section>
     </div>
+
+    <script>
+      {# document.addEventListener('DOMContentLoaded', (event) => {
+        const counterElement = document.getElementById('counter');
+        const addButton = document.getElementById('addBtn');
+        const removeButton = document.getElementById('removeBtn');
+
+        addButton.addEventListener('click', () => {
+            let counterValue = parseInt(counterElement.textContent);
+            counterElement.textContent = counterValue + 1;
+        });
+
+        removeButton.addEventListener('click', () => {
+            let counterValue = parseInt(counterElement.textContent);
+            if (counterValue > 0) { // Pour éviter que le compteur ne devienne négatif
+                counterElement.textContent = counterValue - 1;
+            }
+        });
+      }); #}
+
+      document.addEventListener('DOMContentLoaded', (event) => {
+          const products = document.querySelectorAll('[data-product-id]');
+
+          products.forEach(product => {
+              const productId = product.getAttribute('data-product-id');
+              const counterElement = product.querySelector('.counter');
+              const addButton = product.querySelector('.addBtn');
+              const removeButton = product.querySelector('.removeBtn');
+
+              const addToCartButton = document.querySelector('.addToCartBtn');
+
+              // Charger la valeur du compteur depuis le localStorage
+              let counterValue = localStorage.getItem('counterValue_' + productId);
+              if (counterValue === null) {
+                  counterValue = 1; // Valeur initiale si rien n'est stocké
+              } else {
+                  counterValue = parseInt(counterValue);
+              }
+              counterElement.textContent = counterValue;
+
+              addButton.addEventListener('click', () => {
+                  counterValue++;
+                  counterElement.textContent = counterValue;
+                  localStorage.setItem('counterValue_' + productId, counterValue); // Sauvegarder dans le localStorage
+              });
+
+              removeButton.addEventListener('click', () => {
+                  if (counterValue > 0) {
+                      counterValue--;
+                      counterElement.textContent = counterValue;
+                      localStorage.setItem('counterValue_' + productId, counterValue); // Sauvegarder dans le localStorage
+                  }
+              });
+
+              addToCartButton.addEventListener('click', () => {
+
+                const url = `/cart/add/${productId}`;
+                const data = { quantity: counterValue };
+
+                fetch(url, {
+                    method: 'POST', 
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Produit ajouté au panier ! Quantité totale dans le panier : ' + data.cart[productId]);
+                        console.log(data);
+                    } else {
+                        alert('Erreur lors de l\'ajout au panier.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur:', error);
+                    alert('Erreur lors de l\'ajout au panier.');
+                });
+              });
+          });
+
+      });
+    </script>
 {% endblock %}
