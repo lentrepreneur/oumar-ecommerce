@@ -38,6 +38,26 @@
             
         {% endblock %}
 
+         <!-- MOBILE SEARCH -->
+         <div id="overlaySearch" class="fixed inset-0 bg-black bg-opacity-50  hidden">
+            <div class="w-full bg-white h-[300px] absolute top-0 left-0 right-0 p-5">
+                <form
+                    class="ring-1 ring-[#e1e1e1] w-full px-3 py-1 rounded-lg"
+                    action="{{ path('app_shop_search') }}"
+                    method="POST"
+                    data-turbo="false"
+                >
+                    <input
+                        name="search"
+                        type="text"
+                        placeholder="Rechercher un produit"
+                        class="outline-none w-[92%]"
+                    />
+                    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                </form>
+            </div>
+         </div>
+
         <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden">
             <div class="absolute top-0 left-0 w-64 h-full bg-white shadow-lg p-4">
                 <button id="close-button" class="text-gray-700 focus:outline-none">
@@ -45,7 +65,7 @@
                 </button>
                 <ul class="mt-10 flex flex-col gap-8 w-full">
                     <li class="w-full hover:bg-firstColor px-8 py-1">
-                        <a href="/">Acceuil</a>
+                        <a href="/">Accueil</a>
                     </li>
                     <li class="w-full hover:bg-firstColor px-8 py-1">
                         <a href="{{ path('app_shop') }}">Boutique</a>

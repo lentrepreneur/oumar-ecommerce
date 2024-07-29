@@ -34,13 +34,17 @@
         <div class="flex items-center gap-4">
             <form
                 class="ring-1 ring-[#e1e1e1] px-3 py-1 rounded-2xl hidden md:block"
+                action="{{ path('app_shop_search') }}"
+                method="POST"
+                data-turbo="false"
             >
                 <input
-                type="search"
-                placeholder="Rechercher un produit"
-                class="outline-none"
+                    name="search"
+                    type="text"
+                    placeholder="Rechercher un produit"
+                    class="outline-none"
                 />
-                <button><i class="fa fa-search" aria-hidden="true"></i></button>
+                <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
             </form>
             <!-- BUTTON SEARCH -->
             <button id="search-button" class="md:hidden">
@@ -66,18 +70,5 @@
             </a>
         </div>
     </div>
-    <!-- MOBILE SEARCH -->
-    <div
-        id="mobile-search"
-        class="absolute w-full items-center justify-center p-5 bg-white shadow-md hidden md:hidden search-menu z-100"
-    >
-        <form class="ring-1 ring-[#e1e1e1] w-full px-3 py-1 rounded-lg">
-            <input
-                type="search"
-                placeholder="Rechercher un produit"
-                class="outline-none w-[92%]"
-            />
-            <button><i class="fa fa-search" aria-hidden="true"></i></button>
-        </form>
-    </div>
+   
 </header>

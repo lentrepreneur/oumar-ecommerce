@@ -1,18 +1,18 @@
 document.addEventListener('DOMContentLoaded', function () {
   const searchButton = document.getElementById('search-button')
-  const mobileSearch = document.getElementById('mobile-search')
+  const searchOverlay = document.getElementById('overlaySearch')
 
   const menuButton = document.getElementById('menu-button')
   const overlay = document.getElementById('overlay')
   const closeButton = document.getElementById('close-button')
   const body = document.body
 
-  searchButton.addEventListener('click', function (event) {
-    console.log('is clicking?')
-    event.stopPropagation()
-    mobileSearch.classList.toggle('hidden')
-    mobileSearch.classList.toggle('flex')
-  })
+  // searchButton.addEventListener('click', function (event) {
+  //   console.log('is clicking?')
+  //   event.stopPropagation()
+  //   mobileSearch.classList.toggle('hidden')
+  //   mobileSearch.classList.toggle('flex')
+  // })
 
   menuButton.addEventListener('click', () => {
     overlay.classList.remove('hidden')
@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function () {
     body.classList.remove('no-scroll')
   })
 
-  // Optional: Close the overlay when clicking outside of it
   overlay.addEventListener('click', (e) => {
     if (e.target === overlay) {
       overlay.classList.add('hidden')
@@ -32,13 +31,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   })
 
-  document.addEventListener('click', function (event) {
-    if (
-      !mobileSearch.contains(event.target) &&
-      !searchButton.contains(event.target)
-    ) {
-      mobileSearch.classList.add('hidden')
-      mobileSearch.classList.remove('show')
+  // -----Search
+  searchButton.addEventListener('click', () => {
+    searchOverlay.classList.remove('hidden')
+    body.classList.add('no-scroll')
+  })
+
+  searchOverlay.addEventListener('click', (e) => {
+    if (e.target === searchOverlay) {
+      searchOverlay.classList.add('hidden')
+      body.classList.remove('no-scroll')
     }
   })
 
