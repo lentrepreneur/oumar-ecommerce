@@ -112,3 +112,11 @@
       </div>
     </div>
 {% endblock %}
+
+{% block javascripts_bottom %}
+  <script>
+      function updateValue(value) {
+        document.getElementById('rangeValue').innerText = value
+      }
+  </script>
+{% endblock %}

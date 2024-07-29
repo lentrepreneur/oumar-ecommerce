@@ -23,9 +23,9 @@
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
-        {% block javascripts %}
+        {# {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
-        {% endblock %}
+        {% endblock %} #}
     </head>
     <body>
         {% include 'partials/header.html.twig' %}
@@ -86,7 +86,7 @@
 
         {% include 'partials/footer.html.twig' %}
 
-        <script src="{{ asset('scripts/script.js') }}">
+        <script src="{{ asset('/scripts/script.js') }}">
             
         </script>
 

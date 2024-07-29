@@ -63,13 +63,15 @@
                       <ion-icon name="add"></ion-icon>
                     </button>
                   </div>
-                  <button
-                    type="button"
-                    class="addToCartBtn max-sm:w-full w-[80%] p-3 border rounded-md flex items-center gap-3 bg-black text-white"
-                  >
-                    <i class="fas fa-shopping-cart"></i
-                    ><span>Ajouter au panier</span>
-                  </button>
+                  {# <form> #}
+                    <button
+                      type="button"
+                      class="addToCartBtn max-sm:w-full w-[80%] p-3 border rounded-md flex items-center gap-3 bg-black text-white"
+                    >
+                      <i class="fas fa-shopping-cart"></i
+                      ><span>Ajouter au panier</span>
+                    </button>
+                  {# </form> #}
                 </div>
                 <a
                   href="{{ path('app_checkout') }}"
@@ -91,10 +93,10 @@
           <div class="tabs-container">
             <div class="tabs">
               <button class="tab active">
-                Descripion
+                Description
               </button>
               <button class="tab">
-                Informations Addintionnelles
+                Informations Additionnelles
               </button>
             </div>
             <div class="tab-content desc" id="tab1">
@@ -145,6 +147,6 @@
     </div>
 {% endblock %}
 
-{# {% block javascripts_bottom %}
-     <script src="{{ asset('scripts/detail-page.js') }}"></script>
-{% endblock %} #}
+{% block javascripts_bottom %}
+     <script src="{{ asset('/scripts/detail-page.js') }}"></script>
+{% endblock %}
