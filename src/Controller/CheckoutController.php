@@ -68,6 +68,7 @@ class CheckoutController extends AbstractController
         $cart = $session->get('cart', []);
         $totalPerItem = 0;
         $finalAmount = 0;
+        $totalQuantity = 0;
 
         $user = $this->getUser();
 
@@ -75,6 +76,10 @@ class CheckoutController extends AbstractController
         $user->setAddress(isset($data['address']) ? $data['address'] : null);
         $user->setCity(isset($data['city']) ? $data['city'] : null);
         $this->entityManager->persist($user);
+
+        $order = new Order();
+
+        $order->setCustomer($user);
 
         if (!empty($cart)) {
             $product = null;
@@ -88,28 +93,35 @@ class CheckoutController extends AbstractController
                 }
 
                 $totalPerItem = $product->getPrice() * $quantity;
-                // $finalAmount += $totalPerItem;
-
-                $order = new Order();
-
-                $order->setCustomer($user);
-                $order->setAmount($totalPerItem);
-
-                $this->entityManager->persist($order);
+                $totalQuantity += $quantity;
+                $finalAmount += $totalPerItem;
 
                 $orderDetail = new OrderDetail();
+
                 $orderDetail->setProducts($product);
+                $orderDetail->setQuantity($quantity);
                 $orderDetail->setAmount($totalPerItem);
                 $orderDetail->setCustomerOrder($order);
+
                 $this->entityManager->persist($orderDetail);
             }
         }
+
+        $order->setAmount($finalAmount);
+        $order->setQuantity($totalQuantity);
+
+        $this->entityManager->persist($order);
 
         $this->entityManager->flush();
 
         $session->remove('cart');
 
-        return $this->redirectToRoute('app_home');
+        $this->addFlash('success', 'Commande effectue avec succes');
+
+        return $this->redirectToRoute(
+            'app_profile_order_show',
+            ['id' => $order->getId()]
+        );
 
     }
 }

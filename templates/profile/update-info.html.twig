@@ -1,0 +1,99 @@
+{% extends 'profile/index.html.twig' %}
+
+{% block profile_content %}
+    <div class="w-full justify-center my-8">
+    {% for message in app.flashes('error') %}
+            <div class="p-4 w-full bg-red-500 text-white">
+                {{ message }}
+            </div>
+    {% endfor %}
+
+    <form action="{{ path('app_profile_update_validate') }}" method="POST" id="update-profile-form" class="w-full mt-4 flex flex-col gap-4">
+        <span class="text-lg">Mettre à jour mes informations</span>
+        <div class="w-full flex max-md:flex-col flex-row item-center gap-3">
+            <div class="w-full flex flex-col gap-2">
+                <label for="firstName" class="text-[#ff2f2f]">⚠️(obligatoire)</label>
+                <input
+                    id="firstName"
+                    type="text"
+                    name="firstName"
+                    placeholder="Votre Prénom"
+                    class="w-full md:w-1/2 outline-none p-3 border rounded-md"
+                    value="{{ app.user.firstName }}"
+                />
+            </div>
+            <div class="w-full flex flex-col gap-2">
+                <label for="lastName" class="text-[#ff2f2f]">⚠️(obligatoire)</label>
+                <input
+                    id="lastName"
+                    type="text"
+                    name="lastName"
+                    placeholder="Votre Nom"
+                    class="w-full md:w-1/2 outline-none p-3 border rounded-md"
+                    value="{{ app.user.lastName }}"
+                />
+            </div>
+        </div>
+        <div class="w-full flex max-md:flex-col flex-row gap-3">
+            <div class="w-full flex flex-col gap-2">
+                <label for="email" class="text-[#ff2f2f]">⚠️(obligatoire)</label>
+                <input
+                    id="email"
+                    type="email"
+                    name="email"
+                    placeholder="Votre email"
+                    class="w-full md:w-1/2 outline-none p-3 border rounded-md"
+                    value="{{ app.user.email }}"
+                />
+            </div>
+            <div class="w-full flex flex-col gap-2">
+                <label for="phone" class="text-[#ff2f2f]">⚠️(obligatoire)</label>
+                <input
+                    id="phone"
+                    type="text"
+                    name="phone"
+                    placeholder="Votre numéro de téléphone"
+                    class="w-full md:w-1/2 outline-none p-3 border rounded-md"
+                    value="{{ app.user.phone }}"
+                />
+            </div>
+        </div>
+        <div class="w-full flex max-md:flex-col flex-row gap-3">
+            <input
+                type="text"
+                name="address"
+                placeholder="Votre adresse"
+                class="w-full md:w-1/2 outline-none p-3 border rounded-md"
+                value="{{ app.user.address }}"
+            />
+            <input
+                type="text"
+                name="city"
+                placeholder="Ville"
+                class="w-full md:w-1/2 outline-none p-3 border rounded-md"
+                value="{{ app.user.city }}"
+            />
+        </div>
+
+        <p>⚠️Voulez-vous modifier votre mot de passe ?</p>
+        <input
+            type="password"
+            placeholder="Entrez votre ancien mot de passe"
+            class="w-full outline-none p-3 border rounded-md"
+            name="old_password"
+        />
+
+        <input
+            type="password"
+            placeholder="Entrez un nouveau mot de passe"
+            class="w-full outline-none p-3 border rounded-md"
+            name="new_password"
+        />
+
+        <button type="submit" class="bg-black p-3 text-white">
+            Modifier
+        </button>
+    </form>
+</div>
+
+{% endblock %}

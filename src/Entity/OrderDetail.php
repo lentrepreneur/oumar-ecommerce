@@ -28,6 +28,9 @@ class OrderDetail
     #[ORM\Column(nullable: true)]
     private ?float $amount = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $quantity = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -65,6 +68,30 @@ class OrderDetail
     public function setAmount(?float $amount): static
     {
         $this->amount = $amount;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        $products = $this->getProducts();
+        $quantity = $this->getQuantity();
+        $amount = $this->getAmount();
+
+        $numberFormatter = new \NumberFormatter('fr_FR', \NumberFormatter::CURRENCY);
+        $formattedAmount = ' | ' . $numberFormatter->formatCurrency($amount / 100, 'XAF') . ' ';
+
+        return sprintf('%s x%s %s', $products, $quantity, $formattedAmount);
+    }
+
+    public function getQuantity(): ?int
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(?int $quantity): static
+    {
+        $this->quantity = $quantity;
 
         return $this;
     }

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Profile{% endblock %}
+
+{% block pages_hero_section %}
+    {% include 'partials/pages-hero-section.html.twig' %}
+{% endblock %}
+
+{% block body %}
+    <div class="w-full p-4">
+      <ul class="my-4 flex items-center gap-2">
+        <li><a href="/">Accueil</a></li>
+        <li>/</li>
+        <li>Profile</li>
+      </ul>
+      <hr />
+      <div class="w-full p-8">
+        <div class="w-full flex flex-col gap-3">
+            <ul class="w-full flex max-md:flex-col justify-start max-md:gap-2 gap-4 border">
+                <li class="p-2 hover:bg-firstColor max-md:text-sm"><a href="/profile">Informations du Profile</a></li>
+                <li class="p-2 hover:bg-firstColor max-md:text-sm"><a href="{{ path('app_profile_orders') }}">Commandes</a></li>
+                <li class="p-2 hover:bg-firstColor max-md:text-sm"><a href="{{ path('app_profile_update') }}">Parametres du Compte</a></li>
+                <li class="p-2 hover:bg-firstColor max-md:text-sm"><a href="{{ path('app_logout') }}">Deconnexion</a></li>
+            </ul>
+        </div>
+        <div class="w-full flex items-center justify-center">
+            {% block profile_content %}
+
+            {% endblock %}
+        </div>
+      </div>
+    </div>
+{% endblock %}

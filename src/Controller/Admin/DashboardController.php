@@ -5,10 +5,12 @@ namespace App\Controller\Admin;
 use App\Entity\AboutInfo;
 use App\Entity\Contact;
 use App\Entity\HeaderPromo;
+use App\Entity\Order;
 use App\Entity\Product;
 use App\Entity\SiteInformation;
 use App\Entity\SocialMedia;
 use App\Entity\TopBarPromo;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -52,6 +54,8 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::section('Boutique');
         yield MenuItem::linkToCrud('Gestion des Produits', 'fas fa-list', Product::class);
+        yield MenuItem::linkToCrud('Gestion des Commandes', 'fas fa-list', Order::class);
+        yield MenuItem::linkToCrud('Gestion des utilisateurs', 'fas fa-list', User::class);
 
         yield MenuItem::section('Promotions');
         yield MenuItem::linkToCrud('Promotion Defilante', 'fas fa-list', TopBarPromo::class)

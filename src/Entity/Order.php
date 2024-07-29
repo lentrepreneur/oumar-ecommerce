@@ -36,6 +36,9 @@ class Order
     #[ORM\OneToMany(targetEntity: OrderDetail::class, mappedBy: 'customerOrder')]
     private Collection $orderDetails;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $quantity = null;
+
     public function __construct()
     {
         $this->orderDetails = new ArrayCollection();
@@ -108,6 +111,18 @@ class Order
                 $orderDetail->setCustomerOrder(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getQuantity(): ?int
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(?int $quantity): static
+    {
+        $this->quantity = $quantity;
 
         return $this;
     }

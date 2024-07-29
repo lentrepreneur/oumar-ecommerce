@@ -166,6 +166,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getFullName(): string
+    {
+        return sprintf('%s %s', $this->getFirstname(), $this->getLastname());
+    }
+
     public function getPhone(): ?string
     {
         return $this->phone;

@@ -1,0 +1,48 @@
+{% extends 'profile/index.html.twig' %}
+
+{% block profile_content %}
+    <div class="w-full my-8">
+    {% for message in app.flashes('success') %}
+              <div class="p-4 w-full bg-blue-700 text-green-600">
+                  {{ message }}
+              </div>
+      {% endfor %}
+      <div
+            class="w-full flex flex-col items-center justify-between lg:w-1/2 bg-firstColor mt-4 p-4"
+          >
+          <h2>Resume des produits de la commande : #{{ order.id }}</h2>
+          <h2>A la date du : {{ order.createdAt.format('d/m/Y') }}</h2>
+            {# <!--PRODUCT ITEMS--> #}
+            <div class="w-full flex flex-col gap-4">
+            
+                {% for item in order.getOrderDetails() %}
+                  <div class="flex items-center justify-between">
+                    {# <!--LEFT--> #}
+                    <div class="flex items-center gap-2">
+                      <div class="w-max">
+                        <img
+                          src="{{  asset('/images/products/' ~ item.getProducts().getImages()[0].imageName) }}"
+                          alt=""
+                          class="w-[70px] h-[70px] rounded-md -z-4"
+                        />
+                      </div>
+                      <div class="flex flex-col">
+                        <span class="text-xs font-semibold"
+                          >{{ item.getProducts().name }}</span
+                        >
+                        <span class="text-[#8080808e]">{{ (item.getProducts().price / 100) | format_currency('XAF') }} x {{ item.getQuantity() }}</span>
+                      </div>
+                    </div>
+                    {# <!--RIGHT--> #}
+                    <span class="text-xs font-semibold">{{ ((item.getProducts().price * item.getQuantity()) / 100) | format_currency('XAF') }}</span>
+                  </div>
+                {% endfor %}
+            </div>
+            {# <!--TOTAL--> #}
+            <div class="w-full flex items-center justify-between">
+              <span class="text-lg font-semibold">Total</span>
+              <span class="text-lg font-bold">{{ (order.amount / 100) | format_currency('XAF') }}</span>
+            </div>
+          </div>
+    </div>
+{% endblock %}

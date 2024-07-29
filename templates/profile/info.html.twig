@@ -1,0 +1,46 @@
+{% extends 'profile/index.html.twig' %}
+
+{% block profile_content %}
+    <div class="w-[80%] my-8">
+      {% for message in app.flashes('success') %}
+              <div class="p-4 w-full bg-blue-700 text-green-600">
+                  {{ message }}
+              </div>
+      {% endfor %}
+
+      <div
+          class="w-full bg-firstColor p-4 flex items-center max-md:flex-col max-md:gap-4"
+        >
+          <div
+            class="w-1/3 max-md:w-full flex flex-col items-center justify-center gap-5"
+          >
+            <ion-icon name="person"></ion-icon>
+            <h3 class="text-sm font-semibold">Prenom et Nom</h3>
+            <span>{{app.user.fullName}}</span>
+          </div>
+          <hr />
+          <div
+            class="w-1/3 max-md:w-full flex flex-col items-center justify-center gap-5"
+          >
+            <ion-icon name="call"></ion-icon>
+            <h3 class="text-sm font-semibold">Contacts</h3>
+            <span>{{ app.user.email }}</span>
+            <span>{{ app.user.phone }}</span>
+          </div>
+          <hr />
+          <div
+            class="w-1/3 max-md:w-full flex flex-col items-center justify-center gap-5"
+          >
+            <ion-icon name="locate"></ion-icon>
+            <h3 class="text-sm font-semibold">Addresse</h3>
+            <span>{{ app.user.city }}</span>
+            <span>{{ app.user.address }}</span>
+          </div>
+        </div>
+        <div class="my-8 w-full">
+          <a href="{{ path('app_profile_update') }}" class="bg-black p-3 text-white w-full">
+            Mettre a jour les informations
+          </a>
+        </div>
+    </div>
+{% endblock %}

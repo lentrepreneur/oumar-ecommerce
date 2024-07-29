@@ -1,0 +1,39 @@
+{% extends 'profile/index.html.twig' %}
+
+{% block profile_content %}
+    <div class="w-full my-8">
+    {% for message in app.flashes('error') %}
+              <div class="p-4 w-full bg-blue-700 text-green-600">
+                  {{ message }}
+              </div>
+      {% endfor %}
+      <div
+            class="w-full flex flex-col items-center justify-between lg:w-1/2 bg-firstColor mt-4 p-4"
+          >
+            {# <!--Order ITEMS--> #}
+            <div class="w-full flex flex-col gap-4">
+                {% for item in orders %}
+                
+                <div class="flex items-center justify-between">
+                    {# <!--LEFT--> #}
+                    <div class="flex items-center gap-2">
+                        <div class="flex flex-col">
+                            <span class="text-xs font-semibold">Commande Ref: #{{ item.id }}</span>
+                            <span class="text-[#8080808e]">Quantite : {{ item.quantity }}</span>
+                            <span class="text-[#8080808e]">Montant : {{ (item.amount /100 ) | format_currency('XAF') }}</span>
+                            <span class="text-[#8080808e]">Commande effectue le : {{ item.createdAt.format('d/m/Y') }}</span>
+                        </div>
+                    </div>
+                    {# <!--RIGHT--> #}
+                    <a href="{{ path('app_profile_order_show', {'id': item.id}) }}" class="text-xs font-semibold p-3 bg-black text-white">Voir detail</a>
+                </div>
+                {% endfor %}
+            </div>
+            {# <!--TOTAL--> #}
+            {# <div class="w-full flex items-center justify-between">
+              <span class="text-lg font-semibold">Total</span>
+              <span class="text-lg font-bold">1000000</span>
+            </div> #}
+          </div>
+    </div>
+{% endblock %}
