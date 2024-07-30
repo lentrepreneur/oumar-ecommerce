@@ -7,11 +7,12 @@
                   {{ message }}
               </div>
       {% endfor %}
-      <div
+        <div
             class="w-full flex flex-col items-center justify-between lg:w-1/2 bg-firstColor mt-4 p-4"
           >
             {# <!--Order ITEMS--> #}
             <div class="w-full flex flex-col gap-4">
+            {% if orders != null %}
                 {% for item in orders %}
                 
                 <div class="flex items-center justify-between">
@@ -28,12 +29,14 @@
                     <a href="{{ path('app_profile_order_show', {'id': item.id}) }}" class="text-xs font-semibold p-3 bg-black text-white">Voir detail</a>
                 </div>
                 {% endfor %}
+            {% else %}
+                <div class="w-1/2 flex flex-col gap-4 my-8">
+                    <span>Vous n'avez pas effectue de commandes</span>
+                    <a href="/boutique" class="p-4 bg-black text-white">Ajouter des articles👖</a>
+                </div>
+            {% endif %}
+                
             </div>
-            {# <!--TOTAL--> #}
-            {# <div class="w-full flex items-center justify-between">
-              <span class="text-lg font-semibold">Total</span>
-              <span class="text-lg font-bold">1000000</span>
-            </div> #}
           </div>
     </div>
 {% endblock %}

@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Facture</title>
+    <style>
+       .text-center {
+           text-align: center;
+       }
+
+       .text-right {
+           text-align: right;
+       }
+
+       .text-left {
+           text-align: left;
+       }
+
+       body {
+           font-family: Roboto, sans-serif;
+       }
+
+       table {
+           border-collapse: collapse;
+           width: 100%;
+           margin: 20px 0;
+       }
+
+       table td, table th {
+           padding:0.5rem;
+           border-top: 1px solid #ccc;
+       }
+    </style>
+</head>
+<body>
+    <div class="text-center">
+        <h3>Facture commande n°{{ order.id }}</h3>
+        <table style="width: 100%;border-bottom:1px solid gray;">
+            <tr>
+                <th style="width: 49%;">
+                    <strong>La Boutique Al Amin Designe</strong><br/>
+                    mon adresse,<br/>
+                    code postal, Dakar. Senegal.<br/>
+                    email@gmail.com<br/>
+                    +221 77 000 00 00
+                </th>
+                <th class="text-right">
+                    {{ order.getCustomer().fullName }}</br>
+                    {{ order.getCustomer().City }}</br>
+                    {{ order.getCustomer().address }}</br>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <h5>Votre commande</h5>
+    <span>Passée le : {{ order.createdAt|date('d/m/Y') }}</span> | <span>Payée le : {{ order.updatedAt|date('d/m/Y') }}</span><br/>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nom du produit</th>
+                <th scope="col">Quantité</th>
+                <th scope="col">Prix unitaire</th>
+                <th scope="col">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order.orderDetails %}
+                <tr>
+                    <td>{{ item.getProducts().name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ (item.getProducts().price  / 100) | format_currency('XAF') }}</td>
+                    <td>{{ (item.amount / 100) | format_currency('XAF') }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="text-right fs-5">
+        <strong>Total : </strong>{{ (order.amount / 100) | format_currency('XAF') }}
+    </div>
+
+</body>
+</html>

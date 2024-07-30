@@ -50,28 +50,45 @@
           <h2 class="font-semibold text-lg my-8 text-center">
             Laissez nous un message
           </h2>
+          {% for message in app.flashes('success') %}
+              <div class="p-4 w-full bg-green-600 text-white">
+                  {{ message }}
+              </div>
+          {% endfor %}
+          {% for message in app.flashes('error') %}
+                  <div class="p-4 w-full bg-red-500 text-white">
+                      {{ message }}
+                  </div>
+          {% endfor %}
           <div class="w-[50%] max-md:w-full">
-            <form class="w-full">
+            <form action="{{ path('app_contact_submit') }}" method="POST" class="w-full">
               <div class="flex items-center gap-4">
                 <input
                   type="text"
+                  name="fullName"
                   placeholder="Prenom et Nom"
                   class="w-1/2 border outline-none p-2"
+                  required
                 />
                 <input
                   type="email"
+                  name="email"
                   placeholder="Email"
                   class="w-1/2 border outline-none p-2"
+                  required
                 />
               </div>
               <input
                 type="text"
+                name="phone"
                 placeholder="numero de telephone"
                 class="w-full border outline-none p-2 my-4"
               />
               <textarea
+                name="message"
                 placeholder="Laissez votre message"
                 class="w-full p-2 border outline-none"
+                required
               ></textarea>
               <button
                 type="submit"

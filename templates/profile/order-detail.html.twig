@@ -10,6 +10,7 @@
       <div
             class="w-full flex flex-col items-center justify-between lg:w-1/2 bg-firstColor mt-4 p-4"
           >
+          
           <h2>Resume des produits de la commande : #{{ order.id }}</h2>
           <h2>A la date du : {{ order.createdAt.format('d/m/Y') }}</h2>
             {# <!--PRODUCT ITEMS--> #}
@@ -43,6 +44,25 @@
               <span class="text-lg font-semibold">Total</span>
               <span class="text-lg font-bold">{{ (order.amount / 100) | format_currency('XAF') }}</span>
             </div>
+
+            {% if order.status == 1 %}
+                <div class="flex flex-col gap-3">
+                  <div class="flex items-center my-3 gap-4">
+                    <span class="p-2 bg-green-600 text-white">Payée</span> | <span>le {{ order.updatedAt.format('d/m/Y') }} </span> <br>
+                  </div>
+                  <span class="bg-green-500 p-2">
+                    <a target="_blank" href="{{ path('app_invoice_admin', { id : order.id }) }}" class="btn btn-light btn-sm">Voir/Imprimer la facture</a>
+                  </span>
+                </div>
+            {% else %}
+              {% if order.status == 2 %}
+                  <span class="p-2 bg-orange-600 text-white">Vous n'avez pas encore payé</span>
+              {% elseif order.status == 3 %}
+                  <span class="p-2 bg-slate-800 text-white">En cours de préparation</span>
+              {% elseif order.status == 0 %}
+                  <span class="p-2 bg-red-600 text-white">Annulée</span>
+              {% endif %}
+            {% endif %}
           </div>
     </div>
 {% endblock %}

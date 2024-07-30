@@ -1,0 +1,53 @@
+{% extends '@!EasyAdmin/layout.html.twig' %}
+
+{% block main %}
+    {% if order.status == 1 %}
+        <a target="_blank" href="{{ path('app_invoice_admin', { id : order.id }) }}" class="btn btn-light btn-sm">Voir/Imprimer la facture</a>
+    {% endif %}
+    <h3 class="mt-2">Commande n°{{ order.id }}</h3>
+    <br/>
+    <span>Passée le : {{ order.createdAt|date('d/m/Y') }}</span><br/>
+    <br/>
+    <br/>
+    {{ include('admin/order-state.html.twig', { field : { 'value' : order.status } } ) }}</br>
+    {% if order.status == 1 %}
+        <span>Payée le : {{ order.updatedAt|date('d/m/Y') }}</span>
+    {% else %}
+        <span>Mis a jour le : {{ order.updatedAt|date('d/m/Y') }}</span>
+    {% endif %}
+    <br/>
+    <br/>
+    <strong>Contenu de la commande :</strong><br/>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Image</th>
+            <th scope="col">Nom du produit</th>
+            <th scope="col">Quantité</th>
+            <th scope="col">Prix unitaire</th>
+            <th scope="col">Total</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for item in order.orderDetails %}
+                <tr>
+                    <td>
+                        <img src="{{  asset('/images/products/' ~ item.getProducts().getImages()[0].imageName) }}" width="100px" alt="">
+                    </td>
+                    <td>{{ item.getProducts().name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ (item.getProducts().price  / 100) | format_currency('XAF') }}</td>
+                    <td>{{ (item.amount / 100) | format_currency('XAF') }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="text-right fs-5">
+        <strong>Total : </strong> <td>{{ (order.amount / 100) | format_currency('XAF') }}</td>
+    </div>
+
+
+
+{% endblock %}

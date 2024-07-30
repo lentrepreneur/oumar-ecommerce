@@ -50,6 +50,12 @@ class Product
     #[ORM\OneToMany(targetEntity: OrderDetail::class, mappedBy: 'products')]
     private Collection $orderDetails;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $slug = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $discountAmount = null;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -194,6 +200,30 @@ class Product
                 $orderDetail->setProducts(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): static
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getDiscountAmount(): ?float
+    {
+        return $this->discountAmount;
+    }
+
+    public function setDiscountAmount(?float $discountAmount): static
+    {
+        $this->discountAmount = $discountAmount;
 
         return $this;
     }

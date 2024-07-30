@@ -27,9 +27,6 @@ class Order
     #[ORM\JoinColumn(nullable: false)]
     private ?User $customer = null;
 
-    #[ORM\Column]
-    private ?bool $isPaid = false;
-
     /**
      * @var Collection<int, OrderDetail>
      */
@@ -38,6 +35,12 @@ class Order
 
     #[ORM\Column(nullable: true)]
     private ?int $quantity = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $reference = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $status = null;
 
     public function __construct()
     {
@@ -69,18 +72,6 @@ class Order
     public function setCustomer(?User $customer): static
     {
         $this->customer = $customer;
-
-        return $this;
-    }
-
-    public function isPaid(): ?bool
-    {
-        return $this->isPaid;
-    }
-
-    public function setPaid(bool $isPaid): static
-    {
-        $this->isPaid = $isPaid;
 
         return $this;
     }
@@ -123,6 +114,30 @@ class Order
     public function setQuantity(?int $quantity): static
     {
         $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    public function getReference(): ?string
+    {
+        return $this->reference;
+    }
+
+    public function setReference(?string $reference): static
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
+    public function getStatus(): ?int
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?int $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }
