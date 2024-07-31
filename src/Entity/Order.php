@@ -15,6 +15,11 @@ class Order
 {
     use TimestampableTrait;
 
+    const STATUS_PAID = 1;
+    const STATUS_PENDING = 2;
+    const STATUS_PREPARATION = 2;
+    const STATUS_CANCELED = 0;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

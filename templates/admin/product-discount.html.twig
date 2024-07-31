@@ -1,0 +1,5 @@
+{% if field.value %}
+    <span class="badge text-bg-warning">{{ (field.value / 100) | format_currency('XAF') }}</span>
+{% else %}
+    <span class="badge text-bg-warning">{{ 0 | format_currency('XAF') }}</span>
+{% endif %}

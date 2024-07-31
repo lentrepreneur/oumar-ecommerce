@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\PercentField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
@@ -53,10 +54,15 @@ class ProductCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
+            ImageField::new('images[0].imageName', 'Image')
+                ->setBasePath('images/products')
+                ->setUploadDir('public/images/products')->hideOnForm()
+                ->setUploadedFileNamePattern('[randomhash].[extension]'),
             TextField::new('name', 'Nom du produit'),
             SlugField::new('slug', 'Slug')->setTargetFieldName('name')->onlyOnForms(),
             MoneyField::new('price', 'Prix du produit')->setCurrency('XAF'),
             PercentField::new('discount', 'Reduction/Promo (en %)'),
+            MoneyField::new('discountAmount', 'Prix apres reduction')->setCurrency('XAF')->setTemplatePath('admin/product-discount.html.twig'),
             TextEditorField::new('shortDescription', 'Description Courte du Produit')->onlyOnForms(),
             TextEditorField::new('description', 'Description Complet du Produit')->onlyOnForms(),
             CollectionField::new('images')->setEntryType(ImageFormType::class)->onlyOnForms(),

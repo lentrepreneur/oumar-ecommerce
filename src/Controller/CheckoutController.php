@@ -109,6 +109,7 @@ class CheckoutController extends AbstractController
 
         $order->setAmount($finalAmount);
         $order->setQuantity($totalQuantity);
+        $order->setStatus(Order::STATUS_PREPARATION);
 
         $this->entityManager->persist($order);
 
