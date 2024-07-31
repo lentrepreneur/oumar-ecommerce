@@ -49,8 +49,6 @@ class ProductCrudController extends AbstractCrudController
         ;
     }
 
-
-
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -62,7 +60,7 @@ class ProductCrudController extends AbstractCrudController
             SlugField::new('slug', 'Slug')->setTargetFieldName('name')->onlyOnForms(),
             MoneyField::new('price', 'Prix du produit')->setCurrency('XAF'),
             PercentField::new('discount', 'Reduction/Promo (en %)'),
-            MoneyField::new('discountAmount', 'Prix apres reduction')->setCurrency('XAF')->setTemplatePath('admin/product-discount.html.twig'),
+            // MoneyField::new('discountAmount', 'Prix apres reduction')->setCurrency('XAF')->setTemplatePath('admin/product-discount.html.twig'),
             TextEditorField::new('shortDescription', 'Description Courte du Produit')->onlyOnForms(),
             TextEditorField::new('description', 'Description Complet du Produit')->onlyOnForms(),
             CollectionField::new('images')->setEntryType(ImageFormType::class)->onlyOnForms(),
