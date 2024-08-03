@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmation de l'adresse e-mail</title>
+</head>
+<body>
+    <p>Bonjour,</p>
+
+    <p>Merci de confirmer votre adresse e-mail en cliquant sur le lien ci-dessous :</p>
+
+    <a href="{{ signedUrl }}">Confirmer mon adresse e-mail</a>
+
+    <p>Ce lien expirera le {{ expiresAtMessageKey|trans(expiresAtMessageData, 'messages') }}.</p>
+
+    <p>Merci,</p>
+
+</body>
+</html>

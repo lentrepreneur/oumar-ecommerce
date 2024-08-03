@@ -4,11 +4,14 @@ namespace App\EventSubscriber;
 
 use App\Entity\Order;
 use App\Entity\Product;
+use App\Entity\User;
+use App\Security\AccountNotVerifiedAuthenticationException;
 use App\Service\MailService;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityDeletedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Security\Http\Event\CheckPassportEvent;
 
 class EasyAdminSubscriber implements EventSubscriberInterface
 {
@@ -23,7 +26,8 @@ class EasyAdminSubscriber implements EventSubscriberInterface
             BeforeEntityPersistedEvent::class => ['setDiscountAmountOnPersist'],
             BeforeEntityUpdatedEvent::class => ['setDiscountAmountOnUpdate'],
             BeforeEntityDeletedEvent::class => ['checkOrder'],
-            BeforeEntityUpdatedEvent::class => ['updateOrderStatus']
+            BeforeEntityUpdatedEvent::class => ['updateOrderStatus'],
+            CheckPassportEvent::class => ['onCheckPassport', -10],
         ];
     }
 
@@ -76,22 +80,19 @@ class EasyAdminSubscriber implements EventSubscriberInterface
             $entity->setStatus(Order::STATUS_PAID);
             $this->mailService->sendInvoiceNotification($entity);
         }
+    }
 
-        // if ($entity->getStatus() != Order::STATUS_PAID) {
-        //     if ($entity->getStatus() == Order::STATUS_CANCELED) {
-        //         $entity->setStatus(Order::STATUS_CANCELED);
-        //         return;
-        //     }
+    public function onCheckPassport(CheckPassportEvent $event)
+    {
+        $passport = $event->getPassport();
+        $user = $passport->getUser();
 
-        //     if ($entity->getStatus() == Order::STATUS_PENDING) {
-        //         $entity->setStatus(Order::STATUS_PENDING);
-        //         return;
-        //     }
+        if (!$user instanceof User) {
+            throw new \Exception('Unexpected user type');
+        }
 
-        //     if ($entity->getStatus() == Order::STATUS_PREPARATION) {
-        //         $entity->setStatus(Order::STATUS_PREPARATION);
-        //         return;
-        //     }
-        // }
+        if (!$user->isVerified()) {
+            throw new AccountNotVerifiedAuthenticationException();
+        }
     }
 }

@@ -10,6 +10,18 @@
     {# Register Form #}
     <div class="w-full my-8 flex items-center justify-center">
       <div class="w-[25%] max-md:w-[90%]">
+        {% for message in app.flashes('verify_email_error') %}
+            <div class="p-4 w-full bg-red-500 text-white">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% for message in app.flashes('success') %}
+            <div class="p-4 w-full bg-green-500 text-white">
+                {{ message }}
+            </div>
+        {% endfor %}
+
         <h3 class="text-center font-bold text-xl my-5">Creer votre compte</h3>
         
         <div class="w-full flex flex-col items-center justify-center gap-8">

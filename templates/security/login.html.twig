@@ -9,6 +9,18 @@
         <h3 class="text-center font-bold text-xl my-5">
           Connectez vous a votre compte
         </h3>
+        {% for message in app.flashes('verify_email_error') %}
+            <div class="p-4 w-full bg-red-500 text-white">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% for message in app.flashes('success') %}
+            <div class="p-4 w-full bg-green-500 text-white">
+                {{ message }}
+            </div>
+        {% endfor %}
+        
         {% if error %}
             <div class="p-3 bg-red-300">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
