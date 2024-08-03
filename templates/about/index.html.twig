@@ -18,22 +18,19 @@
       <div class="w-full mb-5 mt-16">
         <div class="w-full flex max-md:flex-col items-center gap-8">
           <img
-            src="https://zenon3.myshopify.com/cdn/shop/files/about-3.png?v=1705406562&width=900"
+            src="{{ asset('images/upload/' ~ aboutInfo.image) }}"
             alt="img"
-            class="w-1/2 max-md:w-full"
+            class="w-1/2 max-md:w-full h-[350px]"
           />
           <div class="w-1/2 max-md:w-full">
             <h2 class="font-semibold text-lg my-8">A Propos de Nous</h2>
             <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi
-              tenetur ab eligendi. Nemo doloremque voluptas accusamus eos,
-              fugit, excepturi sapiente fuga rem nulla alias cum architecto
-              assumenda, tempore numquam facilis?
+              {{ aboutInfo.description|raw }}
             </p>
           </div>
         </div>
         <hr class="my-8" />
-        <div class="w-full flex flex-col justify-center">
+        {# <div class="w-full flex flex-col justify-center">
           <h2 class="font-semibold text-lg my-8 text-center">Notre equipe</h2>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div class="border rounded-lg overflow-hidden">
@@ -87,7 +84,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> #}
       </div>
     </div>
 {% endblock %}

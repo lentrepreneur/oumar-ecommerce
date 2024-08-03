@@ -20,7 +20,8 @@ class RegisterFormType extends AbstractType
             ->add('firstName', TextType::class, [
                 'label' => 'Prenom',
                 'attr' => [
-                    'class' => 'w-full outline-none p-3 border rounded-md'
+                    'class' => 'w-full outline-none p-3 border rounded-md',
+                    'placeholder' => 'Votre prenom'
                 ],
                 'constraints' => [
                     new NotBlank([
@@ -31,7 +32,8 @@ class RegisterFormType extends AbstractType
             ->add('lastName', TextType::class, [
                 'label' => 'Nom',
                 'attr' => [
-                    'class' => 'w-full outline-none p-3 border rounded-md'
+                    'class' => 'w-full outline-none p-3 border rounded-md',
+                    'placeholder' => 'Votre nom'
                 ],
                 'constraints' => [
                     new NotBlank([
@@ -42,7 +44,8 @@ class RegisterFormType extends AbstractType
             ->add('email', TextType::class, [
                 'label' => 'Email',
                 'attr' => [
-                    'class' => 'w-full outline-none p-3 border rounded-md'
+                    'class' => 'w-full outline-none p-3 border rounded-md',
+                    'placeholder' => 'Votre email'
                 ],
                 'constraints' => [
                     new NotBlank([
@@ -56,7 +59,8 @@ class RegisterFormType extends AbstractType
             ->add('password', PasswordType::class, [
                 'label' => 'Mot de passe',
                 'attr' => [
-                    'class' => 'w-full outline-none p-3 border rounded-md'
+                    'class' => 'w-full outline-none p-3 border rounded-md',
+                    'placeholder' => 'Votre mot de passe'
                 ],
                 'constraints' => [
                     new NotBlank([

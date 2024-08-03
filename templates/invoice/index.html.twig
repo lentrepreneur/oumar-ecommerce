@@ -40,11 +40,10 @@
         <table style="width: 100%;border-bottom:1px solid gray;">
             <tr>
                 <th style="width: 49%;">
-                    <strong>La Boutique Al Amin Designe</strong><br/>
-                    mon adresse,<br/>
-                    code postal, Dakar. Senegal.<br/>
-                    email@gmail.com<br/>
-                    +221 77 000 00 00
+                    <strong>{{ siteInfo.siteName }}</strong><br/>
+                    {{ siteInfo.address }},<br/>
+                    {{ siteInfo.email }},<br/>
+                    {{ siteInfo.phone }}
                 </th>
                 <th class="text-right">
                     {{ order.getCustomer().fullName }}</br>

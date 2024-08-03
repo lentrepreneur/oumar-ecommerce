@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Order;
 use App\Entity\OrderDetail;
 use App\Entity\Product;
+use App\Service\MailService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +15,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class CheckoutController extends AbstractController
 {
-    public function __construct(private EntityManagerInterface $entityManager)
+    public function __construct(private EntityManagerInterface $entityManager, private MailService $mailService)
     {
 
     }
@@ -114,6 +115,8 @@ class CheckoutController extends AbstractController
         $this->entityManager->persist($order);
 
         $this->entityManager->flush();
+
+        $this->mailService->sendInvoiceNotification($order);
 
         $session->remove('cart');
 

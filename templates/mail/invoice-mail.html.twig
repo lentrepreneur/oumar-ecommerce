@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Facture</title>
+    <style>
+       .text-center {
+           text-align: center;
+       }
+
+       .text-right {
+           text-align: right;
+       }
+
+       .text-left {
+           text-align: left;
+       }
+
+       body {
+           font-family: Roboto, sans-serif;
+       }
+
+       table {
+           border-collapse: collapse;
+           width: 100%;
+           margin: 20px 0;
+       }
+
+       table td, table th {
+           padding:0.5rem;
+           border-top: 1px solid #ccc;
+       }
+    </style>
+</head>
+<body>
+    <p>Bonjour cher(e), client merci d'avoir commande chez AlAmin Design.</p>
+    <p>Vous pouvez voir ci-dessous les details de votre commande et telecharger ou imprimer la facture.</p>
+    
+    <h3 class="mt-2">Commande n°{{ order.id }}</h3>
+    <br/>
+    <span>Passée le : {{ order.createdAt|date('d/m/Y') }}</span><br/>
+    <br/>
+    <br/>
+    {{ include('admin/order-state.html.twig', { field : { 'value' : order.status } } ) }}</br>
+    {% if order.status == 1 %}
+        <span>Payée le : {{ order.updatedAt|date('d/m/Y') }}</span>
+    {% else %}
+        <span>Mis a jour le : {{ order.updatedAt|date('d/m/Y') }}</span>
+    {% endif %}
+    <br/>
+    <br/>
+    <strong>Contenu de la commande :</strong><br/>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Nom du produit</th>
+            <th scope="col">Quantité</th>
+            <th scope="col">Prix unitaire</th>
+            <th scope="col">Total</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for item in order.orderDetails %}
+                <tr>
+                    <td>{{ item.getProducts().name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ (item.getProducts().price  / 100) | format_currency('XAF') }}</td>
+                    <td>{{ (item.amount / 100) | format_currency('XAF') }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="text-right fs-5">
+        <strong>Total : </strong> <td>{{ (order.amount / 100) | format_currency('XAF') }}</td>
+    </div>
+
+    <br/>
+    <br/>
+    <br/>
+    <strong>{{ siteInfo.siteName }},</strong><br/>
+    <strong>{{ siteInfo.address }},</strong><br/>
+    <strong>{{ siteInfo.email }},</strong><br/>
+    <strong>{{ siteInfo.phone }}</strong><br/>
+</body>

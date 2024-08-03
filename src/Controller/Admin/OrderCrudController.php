@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Order;
+use App\Entity\SiteInformation;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -18,6 +20,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class OrderCrudController extends AbstractCrudController
 {
+    public function __construct(private EntityManagerInterface $manager)
+    {
+
+    }
+
     public static function getEntityFqcn(): string
     {
         return Order::class;
@@ -53,9 +60,11 @@ class OrderCrudController extends AbstractCrudController
     public function show(AdminContext $context)
     {
         $order = $context->getEntity()->getInstance();
+        $siteInfo = $this->manager->getRepository(SiteInformation::class)->findOneBy(['id' => 1]);
 
         return $this->render('admin/order-detail.html.twig', [
             'order' => $order,
+            'siteInfo' => $siteInfo
         ]);
     }
 
