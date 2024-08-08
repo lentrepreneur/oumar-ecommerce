@@ -21,7 +21,9 @@ class AboutInfoCrudController extends AbstractCrudController
             ImageField::new('image', 'Image ulistrative')
                 ->setBasePath('images/upload')
                 ->setUploadDir('public/images/upload')
-                ->setUploadedFileNamePattern('[randomhash].[extension]'),
+                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->setRequired(false)
+                ->setFormTypeOption('allow_delete', true),
         ];
 
     }

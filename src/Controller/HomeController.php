@@ -15,7 +15,7 @@ class HomeController extends AbstractController
     public function index(EntityManagerInterface $entityManager): Response
     {
         $headerPromo = $entityManager->getRepository(HeaderPromo::class)->findAll();
-        $products = $entityManager->getRepository(Product::class)->findAll();
+        $products = $entityManager->getRepository(Product::class)->findBy([], null, 8);
 
         return $this->render('home/index.html.twig', [
             'header_promos' => $headerPromo,

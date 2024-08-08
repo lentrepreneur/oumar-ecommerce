@@ -4,9 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\HeaderPromo;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 
@@ -26,12 +24,16 @@ class HeaderPromoCrudController extends AbstractCrudController
             ImageField::new('leftImage', 'L\'image d\'a gauche')
                 ->setBasePath('images/upload')
                 ->setUploadDir('public/images/upload')
-                ->setUploadedFileNamePattern('[randomhash].[extension]'),
+                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->setRequired(false)
+                ->setFormTypeOption('allow_delete', false),
 
             ImageField::new('rightImage', 'L\'image d\'a droite')
                 ->setBasePath('images/upload')
                 ->setUploadDir('public/images/upload')
-                ->setUploadedFileNamePattern('[randomhash].[extension]'),
+                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->setRequired(false)
+                ->setFormTypeOption('allow_delete', false),
         ];
     }
 }

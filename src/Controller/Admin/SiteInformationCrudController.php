@@ -27,7 +27,16 @@ class SiteInformationCrudController extends AbstractCrudController
             ImageField::new('logo', 'Logo de l\'entreprise')
                 ->setBasePath('images/upload')
                 ->setUploadDir('public/images/upload')
-                ->setUploadedFileNamePattern('[randomhash].[extension]'),
+                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->setRequired(false)
+                ->setFormTypeOption('allow_delete', true),
+
+            ImageField::new('siteIcon', 'L\'icon du site')
+                ->setBasePath('images/upload')
+                ->setUploadDir('public/images/upload')
+                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->setRequired(false)
+                ->setFormTypeOption('allow_delete', true),
         ];
     }
 
