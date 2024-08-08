@@ -28,6 +28,9 @@ class SiteInformation
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $logo = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $siteIcon = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,6 +92,18 @@ class SiteInformation
     public function setLogo(?string $logo): static
     {
         $this->logo = $logo;
+
+        return $this;
+    }
+
+    public function getSiteIcon(): ?string
+    {
+        return $this->siteIcon;
+    }
+
+    public function setSiteIcon(?string $siteIcon): static
+    {
+        $this->siteIcon = $siteIcon;
 
         return $this;
     }

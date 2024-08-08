@@ -23,17 +23,21 @@
             <div class="border rounded-lg overflow-hidden">
                 <!--SHOWCASE BANNER-->
                 <div class="relative showcase">
-                  <img
-                    src="{{ asset('/images/products/') }}{{ item.getImages()[0].imageName }}"
-                    alt="Mens Winter Leathers Jackets"
-                    width="300"
-                    class="w-full h-full object-cover relative z-1 transform transition-transform duration-300 ease-in-out default"
-                  />
-                  <img
-                    src="{{ asset('/images/products/') }}{{ item.getImages()[1].imageName }}"
-                    alt="Mens Winter Leathers Jackets"
-                    class="w-full h-full object-cover absolute top-0 left-0 z-2 opacity-0 hover:opacity-1 transform transition-transform duration-300 ease-in-out hover"
-                  />
+                  <a href="{{ path('app_product_detail', {'id': item.id}) }}">
+                    <img
+                      src="{{ asset('/images/products/') }}{{ item.getImages()[0].imageName }}"
+                      alt="Mens Winter Leathers Jackets"
+                      width="300"
+                      class="w-full h-full object-cover relative z-1 transform transition-transform duration-300 ease-in-out default"
+                    />
+                  </a>
+                  <a href="{{ path('app_product_detail', {'id': item.id}) }}">
+                    <img
+                      src="{{ asset('/images/products/') }}{{ item.getImages()[1].imageName }}"
+                      alt="Mens Winter Leathers Jackets"
+                      class="w-full h-full object-cover absolute top-0 left-0 z-2 opacity-0 hover:opacity-1 transform transition-transform duration-300 ease-in-out hover"
+                    />
+                  </a>
                   {% if (item.discount != 0 and item.discount != null) %}
                     <p
                       class="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-xs font-bold rounded"
@@ -55,7 +59,7 @@
                 </div>
 
                 <div class="p-4">
-                  <a href="#" class="block text-gray-500 text-sm mb-2">Costume</a>
+                  <span class="block text-gray-500 text-sm mb-2">Costume</span>
 
                   <a href="{{ path('app_product_detail', {'id': item.id}) }}">
                     <h3 class="text-lg font-semibold">{{ item.name }}</h3>
@@ -73,6 +77,9 @@
             </div>
           {% endfor %}
         {% endif %}
+      </div>
+      <div class="flex items-center justify-center my-8 w-full h-[200px]">
+          <a href="{{ path('app_shop') }}" class="w-max bg-black text-white px-8 py-2 my-4">En savoir plus</a>
       </div>
     </div>
 {% endblock %}

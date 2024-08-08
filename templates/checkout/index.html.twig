@@ -18,6 +18,12 @@
             <a href="/boutique" class="p-4 bg-black text-white">Ajouter des articles👖</a>
           </div>
         {% else %}
+        {% for message in app.flashes('error') %}
+              <div class="p-4 w-full text-white bg-red-300">
+                  {{ message }}
+              </div>
+        {% endfor %}
+
         <div class="w-full flex flex-col-reverse lg:flex-row gap-5 my-4">
           {# <!--CHECKOUT FORM--> #}
           {% if app.user %}

@@ -39,39 +39,49 @@ class SecurityController extends AbstractController
         $siteInfo = $entityManager->getRepository(SiteInformation::class)->findOneBy(['id' => 1]);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->beginTransaction(); // Démarrer la transaction
 
-            $user->setPassword(
-                $userPasswordHasher->hashPassword(
+            try {
+                $user->setPassword(
+                    $userPasswordHasher->hashPassword(
+                        $user,
+                        $user->getPassword()
+                    )
+                );
+
+                $user->setRoles(['ROLE_USER']);
+
+                $entityManager->persist($user);
+                $entityManager->flush();
+
+                $emailVerifier->sendEmailConfirmation(
+                    'app_verify_email',
                     $user,
-                    $user->getPassword()
-                )
-            );
+                    (new TemplatedEmail())
+                        ->from(new Address($siteInfo->getEmail(), $siteInfo->getSiteName()))
+                        ->to($user->getEmail())
+                        ->subject('Confirmez votre mail.')
+                        ->htmlTemplate('mail/confirmation_email.html.twig')
+                );
 
-            $user->setRoles(['ROLE_USER']);
+                $token = new UsernamePasswordToken($user, 'main', $user->getRoles());
+                $this->tokenStorage->setToken($token);
+                $session->set('_security_main', serialize($token));
 
-            $entityManager->persist($user);
-            $entityManager->flush();
+                $entityManager->commit(); // Valider la transaction
 
-            $emailVerifier->sendEmailConfirmation(
-                'app_verify_email',
-                $user,
-                (new TemplatedEmail())
-                    ->from(new Address($siteInfo->getEmail(), $siteInfo->getSiteName()))
-                    ->to($user->getEmail())
-                    ->subject('Confirmez votre mail.')
-                    ->htmlTemplate('mail/confirmation_email.html.twig')
-            );
+                $this->addFlash(
+                    'success',
+                    'Inscription effectuée avec succès'
+                );
 
-            $token = new UsernamePasswordToken($user, 'main', $user->getRoles());
-            $this->tokenStorage->setToken($token);
-            $session->set('_security_main', serialize($token));
+                return $this->redirectToRoute('app_register');
+            } catch (\Exception $e) {
+                $entityManager->rollback(); // Annuler la transaction
+                $this->addFlash('error', 'Une erreur est survenue lors de votre inscription.');
 
-            $this->addFlash(
-                'success',
-                'Iscription effectue avec succes'
-            );
-
-            return $this->redirectToRoute('app_register');
+                return $this->redirectToRoute('app_register');
+            }
         }
 
         return $this->render('security/register.html.twig', [

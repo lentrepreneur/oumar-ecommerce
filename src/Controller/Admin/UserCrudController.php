@@ -3,13 +3,19 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use Doctrine\ORM\QueryBuilder;
+use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
+use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Orm\EntityRepository;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -29,6 +35,14 @@ class UserCrudController extends AbstractCrudController
             ->add('index', 'detail');
     }
 
+    public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
+    {
+        $response = $this->container->get(EntityRepository::class)->createQueryBuilder($searchDto, $entityDto, $fields, $filters);
+        $response->andWhere("entity.roles NOT LIKE '%%ROLE_ADMIN%%'");
+
+        return $response;
+    }
+
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -38,7 +52,7 @@ class UserCrudController extends AbstractCrudController
             TextField::new('email', 'email'),
             TextField::new('address', 'Adresse'),
             TextField::new('city', 'Ville'),
-            BooleanField::new('isSubscribed', 'Abonnement')->setDisabled(),
+            BooleanField::new('isVerified', 'Utilisateur verifié')->setDisabled(),
         ];
     }
 }

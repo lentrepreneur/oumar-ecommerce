@@ -11,13 +11,19 @@
     <div class="w-full my-8 flex items-center justify-center">
       <div class="w-[25%] max-md:w-[90%]">
         {% for message in app.flashes('verify_email_error') %}
-            <div class="p-4 w-full bg-red-500 text-white">
+            <div class="p-4 w-full bg-red-300 text-white">
                 {{ message }}
             </div>
         {% endfor %}
 
+        {% for message in app.flashes('error') %}
+              <div class="p-4 w-full text-white bg-red-300">
+                  {{ message }}
+              </div>
+        {% endfor %}
+
         {% for message in app.flashes('success') %}
-            <div class="p-4 w-full bg-green-500 text-white">
+            <div class="p-4 w-full bg-green-300 text-white">
                 {{ message }}
             </div>
         {% endfor %}
