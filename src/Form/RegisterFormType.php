@@ -18,14 +18,14 @@ class RegisterFormType extends AbstractType
     {
         $builder
             ->add('firstName', TextType::class, [
-                'label' => 'Prenom',
+                'label' => 'prénom',
                 'attr' => [
                     'class' => 'w-full outline-none p-3 border rounded-md',
-                    'placeholder' => 'Votre prenom'
+                    'placeholder' => 'Votre prénom'
                 ],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Entrer votre prenom',
+                        'message' => 'Entrer votre prénom',
                     ]),
                 ]
             ])
