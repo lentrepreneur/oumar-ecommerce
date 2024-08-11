@@ -20,7 +20,7 @@ class GoogleAuthenticator extends AbstractOAuthAuthenticator
         }
 
         if (true != ($resourceOwner->toArray()['email_verified'] ?? null)) {
-            throw new AuthenticationException('Email not verified');
+            throw new AuthenticationException('Email non verifie');
         }
 
         return $repository->findOneBy([
