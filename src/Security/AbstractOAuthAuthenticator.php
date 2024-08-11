@@ -30,7 +30,8 @@ abstract class AbstractOAuthAuthenticator extends OAuth2Authenticator
     public function __construct(
         private readonly ClientRegistry $clientRegistry,
         private readonly RouterInterface $router,
-        private readonly UserRepository $userRepository
+        private readonly UserRepository $userRepository,
+        private readonly OAuthRegistrationService $registrationService
     ) {
 
     }
@@ -49,7 +50,7 @@ abstract class AbstractOAuthAuthenticator extends OAuth2Authenticator
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->router->generate('index'));
+        return new RedirectResponse($this->router->generate('app_home'));
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
@@ -69,6 +70,7 @@ abstract class AbstractOAuthAuthenticator extends OAuth2Authenticator
 
         if ($user == null) {
             //create his account
+            $user = $this->registrationService->persist($resourceOwner);
         }
 
         return new SelfValidatingPassport(

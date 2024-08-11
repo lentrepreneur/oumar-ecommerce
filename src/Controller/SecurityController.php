@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Form\RegisterFormType;
 use App\Service\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
+use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,6 +24,10 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class SecurityController extends AbstractController
 {
+    public const SCOPES = [
+        'google' => []
+    ];
+
     public function __construct(
         private TokenStorageInterface $tokenStorage
     ) {
@@ -131,6 +136,24 @@ class SecurityController extends AbstractController
             'last_username' => $lastUsername,
             'error' => $error,
         ]);
+    }
+
+    #[Route(path: '/oauth/connect/{service}', name: 'auth_oauth_login', methods: ['GET'])]
+    public function googleLogin(string $service, ClientRegistry $clientRegistry)
+    {
+        if (!in_array($service, array_keys(self::SCOPES), true)) {
+            throw $this->createNotFoundException();
+        }
+
+        return $clientRegistry
+            ->getClient($service)
+            ->redirect(self::SCOPES[$service], []);
+    }
+
+    #[Route(path: '/oauth/check/{service}', name: 'auth_oauth_check', methods: ['GET', 'POST'])]
+    public function check()
+    {
+        return new Response(status: 200);
     }
 
     #[Route(path: '/logout', name: 'app_logout')]

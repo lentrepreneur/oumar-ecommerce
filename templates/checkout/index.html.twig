@@ -116,7 +116,16 @@
           {% else %}
             <div class="w-1/2 flex flex-col gap-4 my-8">
               <span>Vous n'etes pas encore connecte</span>
-              <a href="/login" class="p-4 bg-black text-white">Connectez vous ou Creez un Compte</a>
+              <a href="/login" class="p-4 bg-black text-white">Connectez vous a votre compte</a>
+              <span>Ou</span>
+              <div class="mt-12 mb-8 grid space-y-4">
+                <a href="{{ path('auth_oauth_login', {service: 'google'}) }}" class="group relative flex h-11 items-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-white dark:before:bg-gray-700 dark:before:border-gray-600 before:border before:border-gray-200 before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 disabled:before:bg-gray-300 disabled:before:scale-100">
+                  <span class="w-full relative flex justify-center items-center gap-3 text-base font-medium text-gray-600 dark:text-gray-200">
+                    <img src="{{ asset('images/google-icon.svg') }}" class="absolute left-0 w-5 h-5" alt="google logo" />
+                    <span>Se connecter avec google</span>
+                  </span>
+                </a>
+              </div>
             </div>
           {% endif %}
           {# <!--CHECKOUT RESUME--> #}
